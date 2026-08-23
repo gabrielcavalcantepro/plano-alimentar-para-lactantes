@@ -27,7 +27,7 @@
         <span id="contador-texto">carregando...</span>
       </div>
 
-      <h1 class="abertura-headline">Elimine os quilos da gestação sem atrapalhar a amamentação</h1>
+      <h1 class="abertura-headline">Elimine os <span class="destaque">quilos da gestação</span> sem atrapalhar a amamentação</h1>
       <p class="abertura-sub">Sem cortar sua energia, sem dietas restritas e sem precisar de tempo que você não tem. Um cardápio feito por nutricionista especializada em lactantes.</p>
 
       <img class="abertura-imagem placeholder-imagem" src="assets/placeholders/etapa00-produto-mockup.png" alt="Placeholder: mockup do celular com o app e a folha do cardápio impresso">
@@ -39,7 +39,7 @@
       </div>
 
       <div class="aviso-box">
-        Esta avaliação está disponível somente uma vez por pessoa. Se sair agora, você pode perder sua oportunidade.
+        <strong>⚠️ Atenção:</strong> Esta avaliação está disponível somente uma vez por pessoa. Se sair agora, você pode perder sua oportunidade.
       </div>
 
       <button type="button" class="btn btn-primario btn-grande" id="btn-iniciar-quiz">Quero meu Cardápio Personalizado!</button>
@@ -48,7 +48,7 @@
 
     <!-- ===================== ETAPA 1 - IDADE ===================== -->
     <section class="etapa" id="etapa-1" data-etapa="1">
-      <h2 class="etapa-titulo">Qual é a sua idade?</h2>
+      <h2 class="etapa-titulo">Qual é a sua <span class="destaque">idade</span>?</h2>
       <p class="etapa-subtitulo">Isso ajuda a calibrar seu metabolismo corretamente</p>
       <div class="lista-opcoes" data-tipo="single" data-campo="idade" data-proxima="2">
         <button type="button" class="opcao" data-valor="18-24">
@@ -91,7 +91,7 @@
 
     <!-- ===================== ETAPA 2 - CORPO (ILUSTRAÇÃO) ===================== -->
     <section class="etapa" id="etapa-2" data-etapa="2">
-      <h2 class="etapa-titulo">Como você descreveria seu corpo hoje?</h2>
+      <h2 class="etapa-titulo">Como você descreveria seu <span class="destaque">corpo</span> hoje?</h2>
       <p class="etapa-subtitulo">Selecione a opção que mais te descreve</p>
       <div class="grade-opcoes" data-tipo="single" data-campo="corpoImagem" data-proxima="3">
         <button type="button" class="opcao-cartao" data-valor="tipo1">
@@ -115,7 +115,7 @@
 
     <!-- ===================== ETAPA 3 - O QUE QUER MUDAR ===================== -->
     <section class="etapa" id="etapa-3" data-etapa="3">
-      <h2 class="etapa-titulo">O que você quer realmente mudar agora?</h2>
+      <h2 class="etapa-titulo">O que você quer <span class="destaque">realmente</span> mudar agora?</h2>
       <p class="etapa-subtitulo">Escolha a opção que mais se adapta a você</p>
       <div class="lista-opcoes" data-tipo="single" data-campo="objetivo" data-proxima="4">
         <button type="button" class="opcao" data-valor="emagrecer-de-vez">
@@ -143,7 +143,7 @@
 
     <!-- ===================== ETAPA 4 - CORPO (TEXTO) ===================== -->
     <section class="etapa" id="etapa-4" data-etapa="4">
-      <h2 class="etapa-titulo">Como você descreveria seu corpo hoje?</h2>
+      <h2 class="etapa-titulo">Como você descreveria seu <span class="destaque">corpo</span> hoje?</h2>
       <p class="etapa-subtitulo">Seja honesta, isso personaliza sua solução</p>
       <div class="lista-opcoes" data-tipo="single" data-campo="corpoTexto" data-proxima="5">
         <button type="button" class="opcao" data-valor="gordura-acumulada">
@@ -201,7 +201,7 @@
 
     <!-- ===================== ETAPA 6 - TEMPO AMAMENTANDO ===================== -->
     <section class="etapa" id="etapa-6" data-etapa="6">
-      <h2 class="etapa-titulo">Há quanto tempo você está amamentando?</h2>
+      <h2 class="etapa-titulo">Há quanto tempo você está <span class="destaque">amamentando</span>?</h2>
       <p class="etapa-subtitulo">Isso personaliza o seu cardápio</p>
       <div class="lista-opcoes" data-tipo="single" data-campo="tempoAmamentando" data-proxima="7">
         <button type="button" class="opcao" data-valor="menos-1-mes">
@@ -249,8 +249,9 @@
 
     <!-- ===================== ETAPA 8 - PROVA SOCIAL #1 ===================== -->
     <section class="etapa" id="etapa-8" data-etapa="8">
-      <h2 class="etapa-titulo">Mães Reais. Resultados Reais.</h2>
-      <p class="etapa-subtitulo">Depoimentos de quem já viveu a mesma fase que você</p>
+      <div class="faixa-destaque">🔥 +20 mil mães estão secando com o Plano Alimentar</div>
+      <span class="tag-pill">⭐ Mães Reais. Resultados Reais.</span>
+      <h2 class="etapa-titulo">Veja as transformações de quem já usou o Plano Alimentar</h2>
 
       <div class="caso-social">
         <img class="placeholder-imagem" src="assets/placeholders/etapa08-antes-depois-01.jpg" alt="Placeholder: foto antes e depois real, caso 1">
@@ -278,15 +279,17 @@
 
     <!-- ===================== ETAPA 9 - CAPTURA DE NOME ===================== -->
     <section class="etapa" id="etapa-9" data-etapa="9">
-      <h2 class="etapa-titulo">Para personalizar seu cardápio, como podemos te chamar?</h2>
-      <p class="etapa-subtitulo">Usaremos seu nome para deixar sua avaliação 100% personalizada. Zero spam.</p>
+      <p class="emoji-topo">👋</p>
+      <h2 class="etapa-titulo" style="text-align:center;">Para personalizar seu cardápio, <span class="destaque">como podemos te chamar?</span></h2>
+      <p class="etapa-subtitulo" style="text-align:center;">Usaremos seu nome para deixar sua avaliação 100% personalizada. Zero spam.</p>
       <input type="text" class="campo-texto" id="input-nome" placeholder="Seu primeiro nome" autocomplete="given-name" maxlength="40">
       <button type="button" class="btn btn-primario" id="btn-nome-continuar">Começar minha avaliação →</button>
+      <p class="microcopy">🔒 Seus dados são privados. Zero spam.</p>
     </section>
 
     <!-- ===================== ETAPA 10 - PÓS-PARTO ===================== -->
     <section class="etapa" id="etapa-10" data-etapa="10">
-      <h2 class="etapa-titulo"><span data-bind="nome-etapa10">Mamãe</span>, como você está se sentindo no pós-parto?</h2>
+      <h2 class="etapa-titulo"><span data-bind="nome-etapa10">Mamãe</span>, como você está se sentindo no <span class="destaque">pós-parto</span>?</h2>
       <p class="etapa-subtitulo">Selecione o que mais se aplica a você</p>
       <div class="lista-opcoes" data-tipo="single" data-campo="posParto" data-proxima="11">
         <button type="button" class="opcao" data-valor="exausta">
@@ -335,32 +338,62 @@
     <!-- ===================== ETAPA 12 - BLOCO EDUCACIONAL + DEPOIMENTO ===================== -->
     <section class="etapa" id="etapa-12" data-etapa="12">
       <div class="bloco-educacional">
-        <h2>Por que você não consegue emagrecer na amamentação com dietas normais</h2>
+        <span class="tag-pill">🧠 Por que outras dietas falham?</span>
+        <h2>Por que você <span class="destaque">não consegue emagrecer</span> na amamentação com dietas normais</h2>
         <p>Cortar calorias de forma brusca faz o corpo entender que está em risco. Isso ativa o cortisol, o hormônio do estresse, que retém gordura e pode reduzir a produção de leite exatamente quando seu bebê mais precisa dele.</p>
-        <p>É por isso que dieta genérica não funciona pra quem amamenta. O Plano Alimentar Para Lactantes foi desenhado do outro jeito: pensado para aumentar a produção de leite e, ao mesmo tempo, acelerar a queima de gordura, sem passar fome e sem comprometer sua energia.</p>
+        <p>É por isso que dieta genérica não funciona pra quem amamenta.</p>
+      </div>
+
+      <div class="bloco-borda-destaque">
+        💚 O Plano Alimentar Para Lactantes foi desenhado do outro jeito: pensado para aumentar a produção de leite e, ao mesmo tempo, acelerar a queima de gordura, sem passar fome e sem comprometer sua energia.
       </div>
 
       <img class="placeholder-imagem" src="assets/placeholders/etapa12-print-depoimento.jpg" alt="Placeholder: print real de depoimento de paciente (Instagram ou WhatsApp)">
 
-      <button type="button" class="btn btn-primario" id="btn-continuar-12" style="margin-top:18px;">Continuar minha avaliação →</button>
+      <!-- Depoimento ainda fictício, placeholder até a cliente enviar o texto real -->
+      <div class="bloco-borda-destaque">
+        🎉 Uma paciente aumentou a produção de leite e desinchou em apenas duas semanas seguindo o Plano Alimentar!
+      </div>
+
+      <div class="comparacao-box">
+        <div class="comparacao-col sem">
+          <div class="comparacao-titulo">❌ Sem Plano Alimentar</div>
+          <div class="comparacao-item">😩 <span>Cansaço constante</span></div>
+          <div class="comparacao-item">🍽️ <span>Fome excessiva</span></div>
+          <div class="comparacao-item">📉 <span>Leite reduzindo</span></div>
+          <div class="comparacao-item">⏸️ <span>Peso parado</span></div>
+        </div>
+        <div class="comparacao-col com">
+          <div class="comparacao-titulo">✅ Com Plano Alimentar</div>
+          <div class="comparacao-item">⚡ <span>Energia de volta</span></div>
+          <div class="comparacao-item">😌 <span>Saciedade real</span></div>
+          <div class="comparacao-item">🤱 <span>Leite abundante</span></div>
+          <div class="comparacao-item">📊 <span>Progresso constante</span></div>
+        </div>
+      </div>
+
+      <button type="button" class="btn btn-primario" id="btn-continuar-12" style="margin-top:6px;">Continuar minha avaliação →</button>
     </section>
 
     <!-- ===================== ETAPA 13 - POR QUE ALGUMAS MÃES EMAGRECEM FÁCIL ===================== -->
     <section class="etapa" id="etapa-13" data-etapa="13">
-      <span class="tag-destaque">Menos inchaço, resultado real</span>
-      <h2 class="etapa-titulo" style="font-size:21px;">Por que algumas mães emagrecem fácil enquanto você luta para perder qualquer quilo?</h2>
+      <span class="tag-pill">🔥 Menos inchaço, resultado real</span>
+      <h2 class="etapa-titulo" style="font-size:21px;">Por que algumas mães <span class="destaque">emagrecem fácil</span> enquanto você luta para perder qualquer quilo?</h2>
 
       <img class="placeholder-imagem" src="assets/placeholders/etapa13-antes-depois.jpg" alt="Placeholder: foto antes e depois real" style="margin-bottom:16px;">
 
       <p>Dieta restritiva no pós-parto retém líquido e acumula inflamação. A causa costuma ser cortisol elevado, sono ruim e uma alimentação desajustada pra essa fase. O resultado é o peso travado mesmo quando você sente que está "fazendo tudo certo".</p>
-      <p>Com o Plano Alimentar Para Lactantes, você ajusta tudo por etapas: desinflamar, equilibrar o metabolismo e emagrecer no ritmo seguro, sem sacrificar o leite.</p>
 
-      <button type="button" class="btn btn-primario" id="btn-continuar-13" style="margin-top:8px;">Continuar →</button>
+      <div class="bloco-borda-destaque">
+        Com o Plano Alimentar Para Lactantes, você ajusta tudo por etapas: desinflamar, equilibrar o metabolismo e emagrecer no ritmo seguro, sem sacrificar o leite.
+      </div>
+
+      <button type="button" class="btn btn-primario" id="btn-continuar-13" style="margin-top:6px;">Continuar →</button>
     </section>
 
     <!-- ===================== ETAPA 14 - TEMPO PRA PREPARAR REFEIÇÕES ===================== -->
     <section class="etapa" id="etapa-14" data-etapa="14">
-      <h2 class="etapa-titulo">Quanto tempo você tem para preparar suas refeições?</h2>
+      <h2 class="etapa-titulo">Quanto tempo você tem para <span class="destaque">preparar</span> suas refeições?</h2>
       <p class="etapa-subtitulo">Seu cardápio será adaptado à sua rotina</p>
       <div class="lista-opcoes" data-tipo="single" data-campo="tempoPreparo" data-proxima="15">
         <button type="button" class="opcao" data-valor="menos-15min">
@@ -380,7 +413,7 @@
 
     <!-- ===================== ETAPA 15 - APLV ===================== -->
     <section class="etapa" id="etapa-15" data-etapa="15">
-      <h2 class="etapa-titulo">Seu bebê tem APLV (Alergia à Proteína do Leite de Vaca)?</h2>
+      <h2 class="etapa-titulo">Seu bebê tem <span class="destaque">APLV</span> (Alergia à Proteína do Leite de Vaca)?</h2>
       <p class="etapa-subtitulo">Temos uma versão especial para APLV</p>
       <div class="lista-opcoes" data-tipo="single" data-campo="aplv" data-proxima="16">
         <button type="button" class="opcao" data-valor="sim">
@@ -400,7 +433,7 @@
 
     <!-- ===================== ETAPA 16 - PESO ATUAL ===================== -->
     <section class="etapa" id="etapa-16" data-etapa="16">
-      <h2 class="etapa-titulo">Qual é o seu peso atual?</h2>
+      <h2 class="etapa-titulo"><span data-bind="nome-etapa16">Mamãe</span>, qual é o seu <span class="destaque">peso atual</span>?</h2>
       <p class="etapa-subtitulo">Seja honesta para um resultado preciso</p>
       <div class="slider-box">
         <div class="slider-valor"><span id="valor-peso-atual">70</span></div>
@@ -418,7 +451,7 @@
 
     <!-- ===================== ETAPA 17 - ALTURA ===================== -->
     <section class="etapa" id="etapa-17" data-etapa="17">
-      <h2 class="etapa-titulo">Qual é a sua altura?</h2>
+      <h2 class="etapa-titulo"><span data-bind="nome-etapa17">Mamãe</span>, qual é a sua <span class="destaque">altura</span>?</h2>
       <p class="etapa-subtitulo">Usamos isso para calcular seu IMC</p>
       <div class="slider-box">
         <div class="slider-valor"><span id="valor-altura">165</span></div>
@@ -436,7 +469,7 @@
 
     <!-- ===================== ETAPA 18 - PESO QUE SE SENTIRIA BEM ===================== -->
     <section class="etapa" id="etapa-18" data-etapa="18">
-      <h2 class="etapa-titulo">Qual é o peso com que você se sentiria bem?</h2>
+      <h2 class="etapa-titulo"><span data-bind="nome-etapa18">Mamãe</span>, qual é o peso com que você <span class="destaque">se sentiria bem</span>?</h2>
       <p class="etapa-subtitulo">Qual é o seu peso dos sonhos?</p>
       <div class="slider-box">
         <div class="slider-valor"><span id="valor-peso-desejado">60</span></div>
@@ -448,7 +481,7 @@
           <button type="button" class="slider-btn" data-slider="peso-desejado" data-delta="1">+</button>
           <button type="button" class="slider-btn" data-slider="peso-desejado" data-delta="5">+5</button>
         </div>
-        <div class="slider-meta" id="texto-meta-peso">Meta: emagrecer 10 kg</div>
+        <div class="slider-meta" id="texto-meta-peso">🎯 Meta: emagrecer 10 kg</div>
       </div>
       <button type="button" class="btn btn-primario" id="btn-continuar-18">Ver meu Resultado →</button>
     </section>
@@ -456,7 +489,7 @@
     <!-- ===================== ETAPA 19 - OCASIÃO ESPECIAL ===================== -->
     <section class="etapa" id="etapa-19" data-etapa="19">
       <span class="etapa-tag">Pergunta extra</span>
-      <h2 class="etapa-titulo"><span data-bind="nome-etapa19">Mamãe</span>, tem alguma ocasião especial que está te motivando?</h2>
+      <h2 class="etapa-titulo"><span data-bind="nome-etapa19">Mamãe</span>, tem alguma <span class="destaque">ocasião especial</span> que está te motivando?</h2>
       <p class="etapa-subtitulo">Fixar uma data clara aumenta muito a motivação</p>
       <div class="lista-opcoes" data-tipo="single" data-campo="ocasiaoEspecial" data-proxima="20">
         <button type="button" class="opcao" data-valor="casamento">
@@ -513,25 +546,29 @@
           <span class="opcao-texto"><span class="opcao-label">4 meses</span><span class="opcao-sub">com calma</span></span>
         </button>
       </div>
-      <div class="info-box oculto" id="box-etapa-20">
-        Com o Plano Alimentar Para Lactantes, mães lactantes emagrecem no ritmo seguro, de forma saudável e mantendo o leite.
+      <div class="bloco-borda-destaque oculto" id="box-etapa-20">
+        💡 Com o Plano Alimentar Para Lactantes, mães lactantes emagrecem no ritmo seguro, de forma saudável e mantendo o leite.
       </div>
       <button type="button" class="btn btn-primario oculto" id="btn-continuar-20" style="margin-top:14px;">Continuar →</button>
     </section>
 
     <!-- ===================== ETAPA 21 - RESULTADO, PROJEÇÃO ===================== -->
     <section class="etapa" id="etapa-21" data-etapa="21">
-      <div class="resultado-header">
-        <p class="resultado-eyebrow">Com base no seu diagnóstico...</p>
-        <h2 class="resultado-titulo">Prevemos que você pesará <span data-bind="peso-desejado-21">60</span> kg até <span data-bind="data-final-21">--</span>!</h2>
+      <div class="faixa-resultado">
+        <p class="faixa-resultado-eyebrow">🎯 Com base no seu diagnóstico...</p>
+        <h2 class="faixa-resultado-titulo">Prevemos que você pesará <span class="valor-inv" data-bind="peso-desejado-21">60</span> kg até <span class="valor-inv" data-bind="data-final-21">--</span>!</h2>
+        <p class="faixa-resultado-sub">🎊 Boa notícia! Sua meta é alcançável</p>
       </div>
-      <p class="resultado-sub">Boa notícia! Sua meta é alcançável</p>
 
       <div class="grafico-box">
         <canvas id="grafico-21" width="400" height="220" role="img" aria-label="Gráfico de projeção de peso ao longo do tempo"></canvas>
       </div>
 
-      <p class="texto-projecao" id="texto-projecao-21">Seguindo o Plano Alimentar Para Lactantes, você pode chegar com o corpo que deseja sem parar de amamentar e sem dietas restritivas!</p>
+      <div class="tabela-projecao" id="tabela-projecao-21"></div>
+
+      <div class="bloco-borda-destaque">
+        🎊 <span id="texto-projecao-21">Seguindo o Plano Alimentar Para Lactantes, você pode chegar com o corpo que deseja sem parar de amamentar e sem dietas restritivas!</span>
+      </div>
 
       <button type="button" class="btn btn-primario btn-grande" id="btn-continuar-21">Ver meu Cardápio Completo →</button>
     </section>
@@ -556,6 +593,16 @@
       <div class="conversa-bloco">
         <img class="placeholder-imagem" src="assets/placeholders/etapa22-print-conversa-04.jpg" alt="Placeholder: print real de conversa 4">
         <p class="conversa-citacao">"[Trecho em destaque da conversa real entra aqui.]"</p>
+      </div>
+
+      <div class="bloco-borda-destaque">
+        <p class="checklist-titulo">🏆 Por que o Plano Alimentar funciona para mães lactantes:</p>
+        <ul class="checklist-lista">
+          <li>✅ Alimentos que aumentam a produção de leite</li>
+          <li>✅ Refeições prontas em menos de 30 minutos</li>
+          <li>✅ Progresso constante sem passar fome</li>
+          <li>✅ Energia de volta para curtir seu bebê</li>
+        </ul>
       </div>
 
       <button type="button" class="btn btn-primario" id="btn-continuar-22">Continuar →</button>
@@ -590,58 +637,91 @@
 
     <!-- ===================== ETAPA 24 - PERFIL NUTRICIONAL E PREVISÃO ===================== -->
     <section class="etapa" id="etapa-24" data-etapa="24">
-      <div class="resultado-header">
-        <h2 class="resultado-titulo" style="font-size:22px;">Com base no seu perfil... você pode emagrecer no ritmo seguro nas próximas semanas com o Plano Alimentar Para Lactantes</h2>
+      <div class="faixa-resultado">
+        <p class="faixa-resultado-eyebrow">Com base no seu perfil...</p>
+        <p class="faixa-secar-linha">você pode secar entre</p>
+        <p class="faixa-secar-numero" id="secar-faixa-valor">--</p>
+        <p class="faixa-secar-linha">nas próximas semanas com o Plano Alimentar</p>
       </div>
 
-      <h3 class="secao-titulo-menor">Seu IMC</h3>
       <div class="imc-box">
-        <div class="imc-valor-linha">
-          <span class="imc-numero" id="imc-valor">--</span>
-          <span class="imc-categoria" id="imc-categoria-texto">--</span>
-        </div>
-        <div class="imc-barra">
-          <span class="imc-seg-abaixo"></span>
-          <span class="imc-seg-saudavel"></span>
-          <span class="imc-seg-sobrepeso"></span>
-          <span class="imc-seg-obesidade"></span>
-          <div class="imc-marcador" id="imc-marcador" style="left:0%;"></div>
+        <p class="card-label">📊 Índice de Massa Corporal (IMC)</p>
+        <div class="barra-gradiente imc">
+          <div class="marcador-barra" id="imc-marcador" style="left:0%;"></div>
         </div>
         <div class="imc-legenda">
           <span>Abaixo</span><span>Saudável</span><span>Sobrepeso</span><span>Obesidade</span>
         </div>
+        <div class="resultado-box-clara">📊 Seu IMC é <span id="imc-valor">--</span> <span id="imc-categoria-texto">--</span></div>
       </div>
 
-      <h3 class="secao-titulo-menor">Seu Perfil Nutricional</h3>
       <div class="perfil-box">
-        <div class="perfil-linha"><span class="perfil-label">Objetivo</span><span class="perfil-valor" id="perfil-objetivo">--</span></div>
-        <div class="perfil-linha"><span class="perfil-label">Meta de emagrecimento</span><span class="perfil-valor" id="perfil-meta">--</span></div>
-        <div class="perfil-linha"><span class="perfil-label">Perfil metabólico</span><span class="perfil-valor" id="perfil-metabolico">--</span></div>
-        <div class="perfil-linha"><span class="perfil-label">Versão do cardápio</span><span class="perfil-valor" id="perfil-versao">--</span></div>
+        <p class="card-label">👤 Seu Perfil Nutricional</p>
+        <div class="perfil-linha">
+          <span class="perfil-icone">🎯</span>
+          <span class="perfil-texto">
+            <span class="perfil-label">Objetivo</span>
+            <span class="perfil-valor" id="perfil-objetivo">--</span>
+          </span>
+        </div>
+        <div class="perfil-linha">
+          <span class="perfil-icone">📏</span>
+          <span class="perfil-texto">
+            <span class="perfil-label">Meta de emagrecimento</span>
+            <span class="perfil-valor" id="perfil-meta">--</span>
+          </span>
+        </div>
+        <div class="perfil-linha">
+          <span class="perfil-icone">⚡</span>
+          <span class="perfil-texto">
+            <span class="perfil-label">Perfil metabólico</span>
+            <span class="perfil-valor" id="perfil-metabolico">--</span>
+          </span>
+        </div>
+        <div class="perfil-linha">
+          <span class="perfil-icone">💊</span>
+          <span class="perfil-texto">
+            <span class="perfil-label">Versão do cardápio</span>
+            <span class="perfil-valor" id="perfil-versao">--</span>
+          </span>
+        </div>
       </div>
 
-      <h3 class="secao-titulo-menor">Taxa de Queima de Gordura</h3>
-      <div class="comparacao-box">
-        <div class="comparacao-col sem">
-          <div class="comparacao-titulo">Sem Cardápio</div>
-          <div class="comparacao-item">😩 <span>Fome constante</span></div>
-          <div class="comparacao-item">📉 <span>Leite diminuindo</span></div>
-          <div class="comparacao-item">🔒 <span>Peso travado</span></div>
-          <div class="comparacao-item">🥱 <span>Cansaço extremo</span></div>
+      <div class="taxa-box">
+        <p class="card-label">🔥 Sua Taxa de Queima de Gordura</p>
+        <div class="barra-gradiente taxa">
+          <div class="marcador-barra" style="left:15%;"></div>
         </div>
-        <div class="comparacao-col com">
-          <div class="comparacao-titulo">Com Cardápio</div>
-          <div class="comparacao-item">😌 <span>Saciedade real</span></div>
-          <div class="comparacao-item">🤱 <span>Leite abundante</span></div>
-          <div class="comparacao-item">📊 <span>Progresso constante</span></div>
-          <div class="comparacao-item">⚡ <span>Energia de volta</span></div>
+        <div class="imc-legenda">
+          <span>Lenta</span><span>Média</span><span>Rápida</span>
+        </div>
+        <p class="taxa-resultado-texto">Lenta mas o Plano Alimentar vai corrigir isso 🔥</p>
+
+        <div class="comparacao-box">
+          <div class="comparacao-col sem">
+            <div class="comparacao-titulo">Sem Plano Alimentar</div>
+            <div class="comparacao-item">😩 <span>Fome constante</span></div>
+            <div class="comparacao-item">📉 <span>Leite diminuindo</span></div>
+            <div class="comparacao-item">🔒 <span>Peso travado</span></div>
+            <div class="comparacao-item">🥱 <span>Cansaço extremo</span></div>
+          </div>
+          <div class="comparacao-col com">
+            <div class="comparacao-titulo">Com Plano Alimentar</div>
+            <div class="comparacao-item">😌 <span>Saciedade real</span></div>
+            <div class="comparacao-item">🤱 <span>Leite abundante</span></div>
+            <div class="comparacao-item">📊 <span>Progresso constante</span></div>
+            <div class="comparacao-item">⚡ <span>Energia de volta</span></div>
+          </div>
         </div>
       </div>
 
-      <h3 class="secao-titulo-menor">Previsão Personalizada</h3>
-      <p class="texto-projecao" id="texto-previsao-24">--</p>
-      <div class="grafico-box">
-        <canvas id="grafico-24" width="400" height="180" role="img" aria-label="Gráfico simplificado de previsão de peso"></canvas>
+      <div class="perfil-box">
+        <p class="card-label">📅 Previsão personalizada para <span data-bind="nome-etapa24">você</span></p>
+        <p class="etapa-subtitulo" style="margin-bottom:10px;">Com base em perfis semelhantes ao seu:</p>
+        <p class="texto-projecao" id="texto-previsao-24" style="margin-bottom:14px; text-align:left;">--</p>
+        <div class="grafico-box" style="margin-bottom:0;">
+          <canvas id="grafico-24" width="400" height="180" role="img" aria-label="Gráfico simplificado de previsão de peso"></canvas>
+        </div>
       </div>
 
       <button type="button" class="btn btn-primario btn-grande" id="btn-continuar-24" style="margin-top:6px;">Ver meu Cardápio Personalizado →</button>
@@ -650,6 +730,9 @@
     <!-- ===================== ETAPA 25 - OFERTA FINAL ===================== -->
     <section class="etapa" id="etapa-25" data-etapa="25">
 
+      <h2 class="etapa-titulo" style="text-align:center;"><span data-bind="nome-etapa25">Mamãe</span>, seu Plano Alimentar Para Lactantes está pronto!</h2>
+      <p class="etapa-subtitulo" style="text-align:center;">Escolha o acesso que faz mais sentido para você:</p>
+
       <!-- 25a: aviso condicional APLV -->
       <div class="aplv-box oculto" id="aplv-aviso-25">
         <strong>Versão APLV Disponível!</strong>
@@ -657,25 +740,25 @@
       </div>
 
       <!-- 25b: Super Oferta -->
-      <div class="oferta-card destaque">
-        <span class="oferta-tag">Mais escolhido · Melhor custo-benefício</span>
+      <div class="oferta-card super">
+        <span class="oferta-tag">⭐ Mais escolhido · Melhor custo-benefício</span>
         <h2 class="oferta-titulo">Super Oferta + Bônus</h2>
         <p class="oferta-sub">O caminho mais rápido para emagrecer sem parar de amamentar</p>
 
         <ul class="oferta-lista">
-          <li><span class="oferta-item-nome" id="item-cardapio-nome">Plano Alimentar Para Lactantes</span></li>
-          <li><span class="oferta-item-nome">Guia de Saladas Saciantes em 10 Minutos</span><span class="oferta-item-valor">R$97</span></li>
-          <li><span class="oferta-item-nome">Guia Perdendo Medidas em 20 Passos Sem Dieta Radical</span><span class="oferta-item-valor">R$197</span></li>
-          <li><span class="oferta-item-nome">Consultoria Construindo Metas Que Cabem na Sua Rotina</span><span class="oferta-item-valor">R$247</span></li>
-          <li><span class="oferta-item-nome">Consultoria Silenciando a Fome Emocional</span><span class="oferta-item-valor">R$237</span></li>
-          <li><span class="oferta-item-nome">Consultoria Quebrando o Ciclo da Autossabotagem</span><span class="oferta-item-valor">R$297</span></li>
+          <li><span class="oferta-item-nome" id="item-cardapio-nome">✓ Plano Alimentar Para Lactantes</span></li>
+          <li><span class="oferta-item-nome">✓ Guia de Saladas Saciantes em 10 Minutos</span><span class="oferta-item-valor">R$97</span></li>
+          <li><span class="oferta-item-nome">✓ Guia Perdendo Medidas em 20 Passos Sem Dieta Radical</span><span class="oferta-item-valor">R$197</span></li>
+          <li><span class="oferta-item-nome">✓ Consultoria Construindo Metas Que Cabem na Sua Rotina</span><span class="oferta-item-valor">R$247</span></li>
+          <li><span class="oferta-item-nome">✓ Consultoria Silenciando a Fome Emocional</span><span class="oferta-item-valor">R$237</span></li>
+          <li><span class="oferta-item-nome">✓ Consultoria Quebrando o Ciclo da Autossabotagem</span><span class="oferta-item-valor">R$297</span></li>
         </ul>
 
         <p class="oferta-total-riscado">De R$1.075</p>
         <p class="oferta-preco">R$19,90</p>
-        <p class="oferta-preco-condicoes">Pagamento único · Acesso vitalício · Atualizações inclusas</p>
+        <p class="oferta-preco-condicoes">🔒 Pagamento único · Acesso vitalício · Atualizações inclusas</p>
 
-        <button type="button" class="btn btn-primario btn-grande" id="btn-checkout-super">Quero o plano completo com todos os bônus →</button>
+        <button type="button" class="btn btn-primario btn-grande" id="btn-checkout-super">✅ Quero o plano completo com todos os bônus →</button>
         <p class="microcopy">Pague uma vez e tenha acesso para sempre</p>
       </div>
 
@@ -687,18 +770,23 @@
           <li><span class="oferta-item-nome">Acesso por 7 dias ⚠️</span></li>
           <li><span class="oferta-item-nome">Sem suporte, sem bônus, sem acompanhamento ❌</span></li>
         </ul>
-        <p class="oferta-preco" style="font-size:26px;">R$10,90</p>
+        <p class="oferta-preco">R$10,90</p>
         <button type="button" class="btn btn-secundario" id="btn-abrir-basico">Começar só com o básico (resultados mais lentos)</button>
       </div>
 
       <!-- 25d: Garantia -->
       <div class="garantia-box">
-        <span class="garantia-icone">🛡️</span>
+        <span class="garantia-icone" aria-hidden="true">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2.5L4.5 5.3v5.4c0 5.1 3.2 9.4 7.5 10.8 4.3-1.4 7.5-5.7 7.5-10.8V5.3L12 2.5z" fill="var(--cor-primaria)"/>
+            <path d="M8.5 12.2l2.4 2.4 4.6-4.6" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
         <p class="garantia-texto"><strong>Garantia de 90 dias na Super Oferta.</strong> Risco ZERO. Se você não gostar do Cardápio, basta pedir o seu dinheiro de volta.</p>
       </div>
 
       <!-- 25e: mais prova social -->
-      <h3 class="secao-titulo-menor">Mais mães que já viveram isso</h3>
+      <h3 class="secao-titulo-menor">Mais de 20 mil mães estão secando de forma saudável e segura com o Plano Alimentar!</h3>
 
       <div class="caso-social">
         <img class="placeholder-imagem" src="assets/placeholders/etapa25-antes-depois-01.jpg" alt="Placeholder: foto antes e depois real, oferta final, caso 1">
@@ -725,6 +813,7 @@
 
       <!-- 25f: Resumindo -->
       <div class="bloco-resumo">
+        <h3 class="secao-titulo-menor" style="margin-top:0;">Resumindo...</h3>
         <p>Pode ser a última vez que você acessa esta página, então sugiro que faça sua inscrição e tenha acesso imediato.</p>
         <p>A proposta é simples e clara: você vai aprender na prática como seguir um cardápio especial que ajuda mães lactantes a emagrecerem de forma saudável e segura, enquanto mantêm uma produção de leite adequada e cuidam do seu bebê.</p>
         <p>Você não precisa:</p>

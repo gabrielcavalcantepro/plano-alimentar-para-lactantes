@@ -273,7 +273,7 @@ function configurarCapturaNome() {
       return;
     }
     state.nome = valor.charAt(0).toUpperCase() + valor.slice(1);
-    document.querySelectorAll('[data-bind="nome-etapa10"], [data-bind="nome-etapa19"]').forEach((el) => {
+    document.querySelectorAll('[data-bind^="nome-etapa"]').forEach((el) => {
       el.textContent = state.nome;
     });
     irPara(10);
@@ -346,7 +346,7 @@ function atualizarTextoMeta() {
   const diff = state.pesoAtual - state.pesoDesejado;
   const el = document.getElementById("texto-meta-peso");
   el.textContent = diff > 0
-    ? `Meta: emagrecer ${diff} kg`
+    ? `🎯 Meta: emagrecer ${diff} kg`
     : "Ajuste o peso desejado para calcular sua meta";
 }
 
@@ -372,16 +372,12 @@ function posicaoMarcadorIMC(imc) {
 }
 
 /* ---------------------------------------------------------------------
-   Cálculos: projeção de peso com teto de ritmo seguro (~1kg/semana)
+   Cálculos: projeção de peso
 
-   Regra da spec: o gráfico não pode implicar perda acima de ~1kg por
-   semana, mesmo que o prazo escolhido pela usuária e a diferença de
-   peso levem a uma conta mais rápida. Quando isso acontece, o prazo
-   final se estende até o mínimo necessário para respeitar esse ritmo,
-   em vez de mostrar uma curva irreal.
+   O resultado sempre respeita exatamente o prazo escolhido pela usuária
+   na Etapa 20 (4 semanas / 2 meses / 3 meses / 4 meses), sem estender a
+   data mesmo quando a diferença de peso implica um ritmo mais agressivo.
    --------------------------------------------------------------------- */
-const RITMO_SEGURO_KG_SEMANA = 1;
-
 const PRAZO_EM_DIAS = {
   "4-semanas": 28,
   "2-meses": 60,
@@ -392,14 +388,7 @@ const PRAZO_EM_DIAS = {
 function calcularProjecao(pesoAtual, pesoDesejado, prazoKey) {
   const diffKg = Math.max(0, pesoAtual - pesoDesejado);
   const diasEscolhidos = PRAZO_EM_DIAS[prazoKey] || 60;
-  const semanasEscolhidas = diasEscolhidos / 7;
-
-  let semanasFinal = semanasEscolhidas;
-  if (diffKg > 0) {
-    const semanasMinimasSeguras = diffKg / RITMO_SEGURO_KG_SEMANA;
-    semanasFinal = Math.max(semanasEscolhidas, semanasMinimasSeguras);
-  }
-  semanasFinal = Math.round(semanasFinal * 10) / 10;
+  const semanasFinal = Math.round((diasEscolhidos / 7) * 10) / 10;
 
   const hoje = new Date();
   const dataFinal = new Date(hoje.getTime() + semanasFinal * 7 * 24 * 60 * 60 * 1000);
@@ -418,6 +407,25 @@ function calcularProjecao(pesoAtual, pesoDesejado, prazoKey) {
 }
 
 /* ---------------------------------------------------------------------
+   Faixa "você pode secar entre -Xkg a -Ykg nas próximas semanas"
+   (Etapa 24). Multiplicadores 0.7x / 1.1x sobre a meta de emagrecimento
+   (diffKg), deduzidos batendo o exemplo de referência: meta de 10kg
+   resultava em "-7 a -11 kg", ou seja 10*0.7=7 e 10*1.1=11.
+   --------------------------------------------------------------------- */
+function calcularFaixaSecar(diffKg) {
+  const MULTIPLICADOR_MIN = 0.7;
+  const MULTIPLICADOR_MAX = 1.1;
+
+  if (diffKg <= 0) return "progresso constante";
+
+  const minKg = Math.max(1, Math.round(diffKg * MULTIPLICADOR_MIN));
+  let maxKg = Math.round(diffKg * MULTIPLICADOR_MAX);
+  if (maxKg <= minKg) maxKg = minKg + 1;
+
+  return `-${minKg}kg a -${maxKg}kg`;
+}
+
+/* ---------------------------------------------------------------------
    Gráfico de projeção (canvas, sem bibliotecas externas)
    --------------------------------------------------------------------- */
 function prepararCanvasResponsivo(canvas, alturaCss) {
@@ -432,7 +440,17 @@ function prepararCanvasResponsivo(canvas, alturaCss) {
   return { ctx, largura: larguraCss, altura: alturaCss };
 }
 
-function desenharGraficoPeso(canvas, pontos, alturaCss) {
+function desenharCaixaArredondada(ctx, x, y, largura, altura, raio) {
+  ctx.beginPath();
+  ctx.moveTo(x + raio, y);
+  ctx.arcTo(x + largura, y, x + largura, y + altura, raio);
+  ctx.arcTo(x + largura, y + altura, x, y + altura, raio);
+  ctx.arcTo(x, y + altura, x, y, raio);
+  ctx.arcTo(x, y, x + largura, y, raio);
+  ctx.closePath();
+}
+
+function desenharGraficoPeso(canvas, pontos, alturaCss, comBalaoMeta) {
   const { ctx, largura, altura } = prepararCanvasResponsivo(canvas, alturaCss);
   ctx.clearRect(0, 0, largura, altura);
 
@@ -443,7 +461,7 @@ function desenharGraficoPeso(canvas, pontos, alturaCss) {
   const escalaMax = pesoMax + folga;
   const escalaMin = pesoMin - folga;
 
-  const paddingEsq = 28, paddingDir = 28, paddingTopo = 26, paddingBaixo = 28;
+  const paddingEsq = 28, paddingDir = 28, paddingTopo = comBalaoMeta ? 46 : 26, paddingBaixo = 28;
   const areaLargura = largura - paddingEsq - paddingDir;
   const areaAltura = altura - paddingTopo - paddingBaixo;
 
@@ -494,16 +512,48 @@ function desenharGraficoPeso(canvas, pontos, alturaCss) {
     ctx.strokeStyle = "#c84600";
     ctx.stroke();
 
-    ctx.textAlign = "center";
-    ctx.fillStyle = "#3a2e28";
-    ctx.font = "bold 12px -apple-system, Segoe UI, sans-serif";
-    ctx.fillText(`${p.peso}kg`, px, py - 12);
+    const ultimoPonto = i === pontos.length - 1;
+    if (!(ultimoPonto && comBalaoMeta)) {
+      ctx.textAlign = "center";
+      ctx.fillStyle = "#3a2e28";
+      ctx.font = "bold 12px -apple-system, Segoe UI, sans-serif";
+      ctx.fillText(`${p.peso}kg`, px, py - 12);
+    }
 
     ctx.fillStyle = "#a89a8d";
     ctx.font = "10px -apple-system, Segoe UI, sans-serif";
     const label = i === 0 ? "Hoje" : formatarDataCurta(p.data);
     ctx.fillText(label, px, altura - 10);
   });
+
+  if (comBalaoMeta) {
+    const ultimo = pontos[pontos.length - 1];
+    const ux = x(pontos.length - 1);
+    const uy = y(ultimo.peso);
+
+    ctx.font = "bold 12px -apple-system, Segoe UI, sans-serif";
+    const balaoTexto = `Meta ${ultimo.peso}kg`;
+    const balaoLargura = ctx.measureText(balaoTexto).width + 20;
+    const balaoAltura = 24;
+    let balaoX = ux - balaoLargura / 2;
+    balaoX = Math.max(4, Math.min(largura - balaoLargura - 4, balaoX));
+    const balaoY = Math.max(2, uy - balaoAltura - 16);
+
+    ctx.fillStyle = "#c84600";
+    desenharCaixaArredondada(ctx, balaoX, balaoY, balaoLargura, balaoAltura, 7);
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.moveTo(ux - 6, balaoY + balaoAltura);
+    ctx.lineTo(ux + 6, balaoY + balaoAltura);
+    ctx.lineTo(ux, balaoY + balaoAltura + 7);
+    ctx.closePath();
+    ctx.fill();
+
+    ctx.fillStyle = "#ffffff";
+    ctx.textAlign = "center";
+    ctx.fillText(balaoTexto, balaoX + balaoLargura / 2, balaoY + balaoAltura / 2 + 4);
+  }
 }
 
 /* ---------------------------------------------------------------------
@@ -523,6 +573,35 @@ function perfilMetabolicoTexto() {
 
 function versaoCardapioTexto() {
   return state.aplv === "sim" || state.aplv === "suspeita" ? "Cardápio + Versão APLV" : "Cardápio Padrão";
+}
+
+/* ---------------------------------------------------------------------
+   Tabela de marcos semanais da projeção (Etapa 21), a partir dos
+   mesmos pontos usados no gráfico (já respeitam o ritmo seguro).
+   --------------------------------------------------------------------- */
+function renderizarTabelaProjecao(containerId, pontos) {
+  const container = document.getElementById(containerId);
+  const hoje = new Date();
+  const iconesIntermediarios = ["🟠", "🟡", "🟢", "🟢"];
+
+  container.innerHTML = pontos.map((p, i) => {
+    const ultimo = i === pontos.length - 1;
+    const icone = ultimo ? "🏆" : (iconesIntermediarios[i] || "🟢");
+    const semanas = Math.max(0, Math.round((p.data - hoje) / (1000 * 60 * 60 * 24 * 7)));
+
+    let rotulo;
+    if (i === 0) rotulo = "Início";
+    else if (ultimo) rotulo = `Semana ${semanas} · Meta! 🎯`;
+    else rotulo = `Semana ${semanas}`;
+
+    return `
+      <div class="linha-projecao ${ultimo ? "meta" : ""}">
+        <span class="linha-projecao-icone">${icone}</span>
+        <span class="linha-projecao-peso">${p.peso} kg</span>
+        <span class="linha-projecao-rotulo">${rotulo}</span>
+      </div>
+    `;
+  }).join("");
 }
 
 function aoEntrarEtapa(indice) {
@@ -551,8 +630,10 @@ function aoEntrarEtapa(indice) {
       `Seguindo o Plano Alimentar Para Lactantes, ${state.nome || "você"} pode chegar${trechoOcasiao} com o corpo que deseja sem parar de amamentar e sem dietas restritivas!`;
 
     requestAnimationFrame(() => {
-      desenharGraficoPeso(document.getElementById("grafico-21"), proj.pontos, 200);
+      desenharGraficoPeso(document.getElementById("grafico-21"), proj.pontos, 200, true);
     });
+
+    renderizarTabelaProjecao("tabela-projecao-21", proj.pontos);
 
     iniciarNotificacoesFake();
   }
@@ -570,13 +651,15 @@ function aoEntrarEtapa(indice) {
     const proj = state.projecao || calcularProjecao(state.pesoAtual, state.pesoDesejado, state.prazoObjetivo);
     state.projecao = proj;
 
+    document.getElementById("secar-faixa-valor").textContent = calcularFaixaSecar(proj.diffKg);
+
     document.getElementById("perfil-objetivo").textContent = state.objetivoLabel || "--";
     document.getElementById("perfil-meta").textContent = `${proj.diffKg.toFixed(0)} kg`;
     document.getElementById("perfil-metabolico").textContent = perfilMetabolicoTexto();
     document.getElementById("perfil-versao").textContent = versaoCardapioTexto();
 
     document.getElementById("texto-previsao-24").textContent =
-      `${state.nome || "Você"}, prevemos que você atingirá seu peso ideal de ${state.pesoDesejado} kg até ${formatarData(proj.dataFinal)}`;
+      `${state.nome || "Você"}, prevemos que você atingirá seu peso ideal de ${state.pesoDesejado} kg até aproximadamente ${formatarData(proj.dataFinal)}!`;
 
     requestAnimationFrame(() => {
       desenharGraficoPeso(document.getElementById("grafico-24"), proj.pontos, 160);
@@ -587,8 +670,8 @@ function aoEntrarEtapa(indice) {
     const mostrarAplv = state.aplv === "sim" || state.aplv === "suspeita";
     document.getElementById("aplv-aviso-25").classList.toggle("oculto", !mostrarAplv);
     document.getElementById("item-cardapio-nome").textContent = mostrarAplv
-      ? "Plano Alimentar Para Lactantes (+ Versão APLV)"
-      : "Plano Alimentar Para Lactantes";
+      ? "✓ Plano Alimentar Para Lactantes (+ Versão APLV)"
+      : "✓ Plano Alimentar Para Lactantes";
   }
 }
 
@@ -606,7 +689,7 @@ function iniciarLoading() {
   fill.style.width = "0%";
   percentualEl.textContent = "0";
 
-  const duracaoMs = 5200;
+  const duracaoMs = 10000;
   const inicio = performance.now();
 
   function passo(agora) {
@@ -687,7 +770,7 @@ function mostrarToast() {
   toast.className = "toast-compra toast-topo";
   toast.innerHTML =
     `<span class="toast-icone">🛒</span>` +
-    `<span><strong>${pessoa.nome}</strong>, de ${pessoa.cidade}/${pessoa.estado}, acabou de comprar o Plano Alimentar Para Lactantes! Plano Completo</span>`;
+    `<span><strong>${pessoa.nome}</strong>, de ${pessoa.cidade}/${pessoa.estado}, acabou de comprar o Plano Alimentar Para Lactantes! <span class="tag-toast-completo">Plano Completo</span></span>`;
 
   container.appendChild(toast);
 

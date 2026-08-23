@@ -146,14 +146,16 @@ img { max-width: 100%; display: block; }
 }
 
 .etapa-tag {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   align-self: flex-start;
-  background: var(--cor-primaria);
-  color: var(--cor-branco);
+  background: var(--cor-primaria-clara);
+  color: var(--cor-primaria-escura);
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.02em;
-  padding: 4px 12px;
+  padding: 5px 12px;
   border-radius: 999px;
   margin-bottom: 12px;
 }
@@ -163,10 +165,77 @@ img { max-width: 100%; display: block; }
   margin-bottom: 6px;
 }
 
+.emoji-topo {
+  font-size: 40px;
+  text-align: center;
+  margin: 0 0 10px;
+  line-height: 1;
+}
+
 .etapa-subtitulo {
   color: var(--cor-texto-suave);
   font-size: 15px;
   margin-bottom: 22px;
+}
+
+/* ---------- Utilidades de destaque reutilizáveis ---------- */
+
+/* Trecho de frase em destaque (dentro de títulos, ex: "quilos da gestação") */
+.destaque {
+  color: var(--cor-primaria);
+}
+
+/* Tag discreta em formato pill, com emoji + texto curto (etapas 8, 12, 13) */
+.tag-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-start;
+  background: var(--cor-primaria-clara);
+  color: var(--cor-primaria-escura);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 999px;
+  margin-bottom: 10px;
+}
+
+/* Faixa/barra sólida chamativa, cor primária cheia (etapas 8 e 21) */
+.faixa-destaque {
+  background: var(--cor-primaria);
+  color: var(--cor-branco);
+  font-weight: 700;
+  font-size: 13px;
+  text-align: center;
+  padding: 10px 14px;
+  border-radius: var(--raio-pequeno);
+  margin-bottom: 16px;
+}
+
+/* Bloco com fundo tintado (cor primária bem clara) e borda na cor primária cheia */
+.bloco-borda-destaque {
+  background: var(--cor-primaria-clara);
+  border: 1.5px solid var(--cor-primaria);
+  border-radius: var(--raio);
+  padding: 14px 16px;
+  margin: 14px 0;
+  font-size: 14px;
+  color: var(--cor-texto);
+}
+.bloco-borda-destaque strong { color: var(--cor-primaria-escura); }
+.checklist-titulo {
+  font-weight: 700;
+  color: var(--cor-primaria-escura);
+  margin: 0 0 8px;
+}
+.checklist-lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.checklist-lista li {
+  padding: 4px 0;
+  font-size: 14px;
 }
 
 /* ---------- Opções (single/multi select) ---------- */
@@ -331,7 +400,7 @@ img { max-width: 100%; display: block; }
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--cor-primaria);
+  background: var(--cor-sucesso);
   animation: pulsar 1.4s infinite;
 }
 @keyframes pulsar {
@@ -371,15 +440,16 @@ img { max-width: 100%; display: block; }
   color: var(--cor-primaria-escura);
 }
 .aviso-box {
-  background: #fbeee7;
-  border: 1px solid var(--cor-alerta);
+  background: #fff1e0;
+  border: 1.5px solid var(--cor-primaria);
   border-radius: var(--raio-pequeno);
   padding: 12px 14px;
   font-size: 13px;
-  color: var(--cor-alerta);
+  color: var(--cor-primaria-escura);
   margin-bottom: 22px;
   text-align: center;
 }
+.aviso-box strong { color: var(--cor-primaria); }
 
 /* ---------- Placeholder genérico de imagem ---------- */
 
@@ -451,16 +521,6 @@ img { max-width: 100%; display: block; }
 .bloco-educacional h2 { font-size: 19px; }
 .bloco-educacional p { font-size: 15px; color: var(--cor-texto); }
 
-.tag-destaque {
-  display: inline-block;
-  background: var(--cor-primaria-clara);
-  color: var(--cor-primaria-escura);
-  font-size: 12px;
-  font-weight: 700;
-  padding: 4px 12px;
-  border-radius: 999px;
-  margin-bottom: 12px;
-}
 
 /* ---------- Slider numérico ---------- */
 
@@ -473,7 +533,7 @@ img { max-width: 100%; display: block; }
   text-align: center;
 }
 .slider-valor {
-  font-family: var(--fonte-titulo);
+  font-weight: 800;
   font-size: 42px;
   color: var(--cor-primaria-escura);
   margin-bottom: 4px;
@@ -539,6 +599,72 @@ input[type="range"].slider-input {
   text-align: center;
   margin-bottom: 18px;
 }
+
+/* Faixa cheia com a cor destaque para o resultado da Etapa 21 */
+.faixa-resultado {
+  background: var(--cor-primaria);
+  border-radius: var(--raio);
+  padding: 18px 20px;
+  margin-bottom: 18px;
+  text-align: center;
+}
+.faixa-resultado-eyebrow {
+  font-size: 13px;
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 8px;
+}
+.faixa-resultado-titulo {
+  font-size: 22px;
+  color: var(--cor-branco);
+  margin-bottom: 10px;
+}
+.faixa-resultado-titulo .valor-inv {
+  color: #ffe6cf;
+}
+.faixa-resultado-sub {
+  color: var(--cor-branco);
+  font-weight: 700;
+  font-size: 14px;
+  margin: 0;
+}
+
+.faixa-secar-linha {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--cor-branco);
+  margin: 0;
+}
+.faixa-secar-numero {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--cor-branco);
+  margin: 4px 0 6px;
+}
+
+/* Tabela de marcos semanais da projeção (Etapa 21) */
+.tabela-projecao {
+  background: var(--cor-cartao);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  padding: 4px 16px;
+  margin-bottom: 16px;
+}
+.linha-projecao {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 0;
+  border-bottom: 1px dashed var(--cor-borda);
+  font-size: 14px;
+}
+.linha-projecao:last-child { border-bottom: none; }
+.linha-projecao-icone { font-size: 15px; flex-shrink: 0; width: 20px; text-align: center; }
+.linha-projecao-peso { font-weight: 700; width: 60px; flex-shrink: 0; }
+.linha-projecao-rotulo { color: var(--cor-texto-suave); flex: 1; text-align: right; }
+.linha-projecao.meta { color: var(--cor-primaria-escura); }
+.linha-projecao.meta .linha-projecao-peso { color: var(--cor-primaria); }
+.linha-projecao.meta .linha-projecao-rotulo { color: var(--cor-primaria-escura); font-weight: 700; }
+
 .grafico-box {
   background: var(--cor-cartao);
   border: 1px solid var(--cor-borda);
@@ -554,6 +680,50 @@ input[type="range"].slider-input {
   margin-bottom: 20px;
 }
 
+/* ---------- Cabeçalho pequeno com ícone, dentro dos cards da Etapa 24 ---------- */
+
+.card-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--cor-texto-suave);
+  margin: 0 0 12px;
+}
+
+.resultado-box-clara {
+  background: var(--cor-primaria-clara);
+  color: var(--cor-primaria-escura);
+  font-weight: 700;
+  font-size: 14px;
+  border-radius: var(--raio-pequeno);
+  padding: 10px 14px;
+  text-align: center;
+}
+
+/* Barra em gradiente contínuo (usada no IMC e na taxa de queima) */
+.barra-gradiente {
+  height: 12px;
+  border-radius: 999px;
+  position: relative;
+  margin-bottom: 6px;
+}
+.barra-gradiente.imc {
+  background: linear-gradient(90deg, #a9c8f0 0%, #7fd1a0 32%, #f0cf6b 62%, #ef8f7a 100%);
+}
+.barra-gradiente.taxa {
+  background: linear-gradient(90deg, #ef8f7a 0%, #f0cf6b 50%, #7fd1a0 100%);
+}
+.marcador-barra {
+  position: absolute;
+  top: -5px;
+  width: 4px;
+  height: 22px;
+  background: var(--cor-texto);
+  border-radius: 2px;
+  transition: left 0.4s ease;
+}
+
 /* ---------- IMC ---------- */
 
 .imc-box {
@@ -563,47 +733,12 @@ input[type="range"].slider-input {
   padding: 18px;
   margin-bottom: 16px;
 }
-.imc-valor-linha {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-.imc-numero {
-  font-family: var(--fonte-titulo);
-  font-size: 30px;
-  color: var(--cor-primaria-escura);
-}
-.imc-categoria {
-  font-weight: 700;
-  font-size: 14px;
-}
-.imc-barra {
-  display: flex;
-  height: 12px;
-  border-radius: 999px;
-  overflow: hidden;
-  margin-bottom: 6px;
-  position: relative;
-}
-.imc-seg-abaixo { background: #cdd9e8; flex: 14 0 0%; }
-.imc-seg-saudavel { background: var(--cor-secundaria); flex: 26 0 0%; }
-.imc-seg-sobrepeso { background: #e3b158; flex: 20 0 0%; }
-.imc-seg-obesidade { background: var(--cor-alerta); flex: 40 0 0%; }
-.imc-marcador {
-  position: absolute;
-  top: -6px;
-  width: 4px;
-  height: 24px;
-  background: var(--cor-texto);
-  border-radius: 2px;
-  transition: left 0.4s ease;
-}
 .imc-legenda {
   display: flex;
   justify-content: space-between;
   font-size: 11px;
   color: var(--cor-texto-suave);
+  margin-bottom: 14px;
 }
 
 /* ---------- Perfil nutricional ---------- */
@@ -617,15 +752,55 @@ input[type="range"].slider-input {
 }
 .perfil-linha {
   display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  padding: 9px 0;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 0;
   border-bottom: 1px solid var(--cor-borda);
-  font-size: 14px;
 }
 .perfil-linha:last-child { border-bottom: none; }
-.perfil-label { color: var(--cor-texto-suave); }
-.perfil-valor { font-weight: 700; text-align: right; }
+.perfil-icone {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: var(--cor-primaria-clara);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+.perfil-texto { flex: 1; }
+.perfil-label {
+  display: block;
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--cor-texto-suave);
+  margin-bottom: 2px;
+}
+.perfil-valor {
+  display: block;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--cor-texto);
+}
+
+/* ---------- Taxa de queima de gordura ---------- */
+
+.taxa-box {
+  background: var(--cor-cartao);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  padding: 18px;
+  margin-bottom: 16px;
+}
+.taxa-resultado-texto {
+  font-weight: 700;
+  color: var(--cor-primaria-escura);
+  font-size: 14px;
+  margin: 10px 0 16px;
+}
 
 .comparacao-box {
   display: grid;
@@ -751,17 +926,6 @@ input[type="range"].slider-input {
 }
 .aplv-box strong { display: block; margin-bottom: 4px; font-size: 15px; }
 
-.info-box {
-  background: var(--cor-fundo-alt);
-  border: 1px solid var(--cor-borda);
-  border-radius: var(--raio);
-  padding: 14px 16px;
-  margin-bottom: 0;
-  font-size: 14px;
-  color: var(--cor-texto);
-  text-align: center;
-}
-
 .oferta-card {
   border-radius: var(--raio);
   padding: 20px;
@@ -769,15 +933,16 @@ input[type="range"].slider-input {
   border: 2px solid var(--cor-borda);
   background: var(--cor-cartao);
 }
-.oferta-card.destaque {
+.oferta-card.super {
+  background: var(--cor-primaria);
   border-color: var(--cor-primaria);
   box-shadow: var(--sombra-forte);
   position: relative;
 }
 .oferta-tag {
   display: inline-block;
-  background: var(--cor-primaria);
-  color: var(--cor-branco);
+  background: var(--cor-primaria-clara);
+  color: var(--cor-primaria-escura);
   font-size: 12px;
   font-weight: 700;
   padding: 5px 12px;
@@ -785,10 +950,39 @@ input[type="range"].slider-input {
   margin-bottom: 12px;
 }
 .oferta-tag.neutra {
-  background: var(--cor-texto-claro);
+  background: var(--cor-fundo-alt);
+  color: var(--cor-texto-suave);
+}
+.oferta-card.super .oferta-tag {
+  background: rgba(255,255,255,0.22);
+  color: var(--cor-branco);
 }
 .oferta-titulo { font-size: 20px; margin-bottom: 4px; }
 .oferta-sub { color: var(--cor-texto-suave); font-size: 14px; margin-bottom: 16px; }
+.oferta-card.super .oferta-titulo,
+.oferta-card.super .oferta-item-nome,
+.oferta-card.super .oferta-preco {
+  color: var(--cor-branco);
+}
+.oferta-card.super .oferta-sub,
+.oferta-card.super .oferta-preco-condicoes,
+.oferta-card.super .microcopy {
+  color: rgba(255,255,255,0.85);
+}
+.oferta-card.super .oferta-lista li {
+  border-bottom-color: rgba(255,255,255,0.28);
+}
+.oferta-card.super .oferta-item-valor,
+.oferta-card.super .oferta-total-riscado {
+  color: rgba(255,255,255,0.65);
+}
+.oferta-card.super .btn-primario {
+  background: var(--cor-branco);
+  color: var(--cor-primaria);
+}
+.oferta-card.super .btn-primario:active {
+  background: var(--cor-fundo-alt);
+}
 
 .oferta-lista { list-style: none; padding: 0; margin: 0 0 16px; }
 .oferta-lista li {
@@ -816,7 +1010,7 @@ input[type="range"].slider-input {
 }
 .oferta-preco {
   text-align: center;
-  font-family: var(--fonte-titulo);
+  font-weight: 800;
   font-size: 34px;
   color: var(--cor-primaria-escura);
   margin-bottom: 4px;
@@ -913,6 +1107,16 @@ input[type="range"].slider-input {
   transition: opacity 0.35s ease, transform 0.35s ease;
 }
 .toast-compra strong { color: var(--cor-primaria-escura); }
+.tag-toast-completo {
+  display: inline-block;
+  background: var(--cor-primaria-clara);
+  color: var(--cor-primaria-escura);
+  font-weight: 700;
+  font-size: 11px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  margin-left: 2px;
+}
 .toast-icone {
   font-size: 18px;
   flex-shrink: 0;
@@ -955,7 +1159,7 @@ input[type="range"].slider-input {
 .modal-titulo { font-size: 21px; text-align: center; margin-bottom: 10px; }
 .modal-texto { font-size: 14px; text-align: center; color: var(--cor-texto-suave); margin-bottom: 16px; }
 .modal-preco-de { text-align: center; color: var(--cor-texto-claro); text-decoration: line-through; font-size: 14px; }
-.modal-preco-por { text-align: center; font-family: var(--fonte-titulo); font-size: 30px; color: var(--cor-primaria-escura); margin-bottom: 18px; }
+.modal-preco-por { text-align: center; font-weight: 800; font-size: 30px; color: var(--cor-primaria-escura); margin-bottom: 18px; }
 
 /* ---------- Rodapé fixo de CTA (etapa 25) ---------- */
 
