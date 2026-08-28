@@ -1,0 +1,13 @@
+ETAPA 2 - "Como você descreveria seu corpo hoje?" (ilustração)
+
+Precisa de 4 imagens, EXATAMENTE NESSA ORDEM (mais cheio -> mais magro):
+1. Tipo 1: ilustração de corpo feminino, o mais cheio dos quatro
+2. Tipo 2: intermediário
+3. Tipo 3: intermediário
+4. Tipo 4: o mais magro dos quatro
+
+A ordem importa aqui, então me diga qual arquivo é qual tipo quando
+avisar que terminou (ou nomeie os arquivos com "tipo1", "tipo2",
+"tipo3", "tipo4" em algum lugar do nome, assim fica bem claro pra mim).
+
+Proporção sugerida: retrato, algo perto de 320x480.

@@ -1,0 +1,14 @@
+ETAPA 8 - "Mães Reais. Resultados Reais." (primeira prova social)
+
+Precisa de 3 imagens (uma por depoimento/caso):
+1. Foto antes/depois real, caso 1
+2. Foto antes/depois real, caso 2
+3. Foto antes/depois real, caso 3
+
+Se puder, me diga também (pode ser numa mensagem, não precisa estar no
+nome do arquivo) pra cada caso: o resultado (ex: -X kg em Y semanas),
+o depoimento da paciente, e nome/idade/cidade. Hoje esses textos estão
+como placeholder entre colchetes no código, esperando esse conteúdo
+real.
+
+Proporção sugerida: paisagem, algo perto de 640x400.

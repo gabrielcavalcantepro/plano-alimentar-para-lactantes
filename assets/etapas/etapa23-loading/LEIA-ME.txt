@@ -1,0 +1,10 @@
+ETAPA 23 - Tela de carregamento ("Gerando seu Cardápio Personalizado...")
+
+Precisa de 1 imagem:
+- Foto antes/depois real, que aparece perto do fim da barra de
+  progresso com a tag "Resultado Verificado".
+
+Se puder, mande também o depoimento curto que aparece junto (hoje é
+placeholder no código).
+
+Proporção sugerida: paisagem, algo perto de 500x350.

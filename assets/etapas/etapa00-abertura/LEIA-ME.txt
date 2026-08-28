@@ -1,0 +1,10 @@
+ETAPA 0 - Abertura do quiz
+
+Precisa de 1 imagem:
+- Mockup de produto: celular exibindo o app/avaliação + a folha do
+  cardápio impresso ao lado.
+- Proporção sugerida: retrato, algo perto de 480x600 (não precisa ser
+  exato).
+
+Pode subir com o nome que quiser (jpg ou png). Quando você me avisar
+que terminou, eu confirmo o arquivo e atualizo o quiz.

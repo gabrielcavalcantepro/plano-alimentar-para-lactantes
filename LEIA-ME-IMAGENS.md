@@ -5,16 +5,29 @@ caixa bege com borda tracejada, o texto "IMAGEM PLACEHOLDER" e o nome do arquivo
 escrito dentro. Isso é só pra deixar óbvio, ao navegar pelo quiz, quais espaços ainda
 precisam de imagem real.
 
-**Para trocar por uma imagem real, basta substituir o arquivo mantendo exatamente o
-mesmo nome e a mesma pasta.** O HTML já referencia esses nomes diretamente
-(`<img src="assets/placeholders/etapa00-produto-mockup.png">` etc.), então não é
-preciso mexer em nenhum código, CSS ou JS. Assim que o arquivo novo for salvo no lugar
-do antigo (mesmo nome, mesma extensão), a imagem real passa a aparecer automaticamente
-no quiz.
+## Como subir as imagens reais
+
+Existe uma pasta pronta pra isso: **`/assets/etapas/`**, com uma subpasta por etapa
+que tem imagem (`etapa00-abertura/`, `etapa02-corpo/`, `etapa08-prova-social-1/` etc.).
+Basta subir os arquivos reais dentro da pasta da etapa correspondente, **com o nome
+que quiser**, sem precisar manter nenhum nome específico. Cada subpasta tem seu
+próprio `LEIA-ME.txt` explicando exatamente o que aquela imagem precisa ser, e o
+`assets/etapas/LEIA-ME.md` tem a visão geral de todas as pastas.
+
+Quando terminar de subir tudo, é só avisar (ex: "subi todas as imagens") que o
+código é atualizado pra usar os arquivos reais no lugar dos placeholders atuais. Até
+lá, o quiz continua mostrando os placeholders cinza normalmente, sem risco de quebrar
+nada enquanto os arquivos vão sendo subidos aos poucos.
 
 Dica: para manter o carregamento rápido (importante em tráfego pago direto pro quiz),
 exporte as imagens reais já otimizadas para web (JPG comprimido para fotos, PNG só
 onde precisar de transparência) e evite arquivos muito acima de 150 a 250 KB cada.
+
+## Referência: o que cada posição do quiz precisa ser
+
+A tabela abaixo continua valendo como referência do que cada posição precisa ser
+(mesmo conteúdo do `LEIA-ME.txt` de cada pasta em `/assets/etapas/`), mas os *nomes de
+arquivo* listados aqui são só os dos placeholders atuais, não é preciso replicá-los.
 
 ## Lista completa
 
