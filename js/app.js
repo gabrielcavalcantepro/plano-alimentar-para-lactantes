@@ -807,9 +807,17 @@ function irParaCheckout(plano) {
   window.location.href = `${CHECKOUT_URL}${separador}plano=${plano}`;
 }
 
+/* Botões fora dos cartões de oferta não vão direto pro checkout (temos
+   2 preços diferentes); eles são âncora, sempre levando de volta pra
+   Super Oferta pra pessoa escolher ali. */
+function irParaOfertaSuper() {
+  document.getElementById("oferta-super").scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
 function configurarOfertaFinal() {
   document.getElementById("btn-checkout-super").addEventListener("click", () => irParaCheckout("super"));
-  document.getElementById("btn-checkout-resumo").addEventListener("click", () => irParaCheckout("super"));
+  document.getElementById("btn-checkout-resumo").addEventListener("click", irParaOfertaSuper);
+  document.getElementById("btn-checkout-bio").addEventListener("click", irParaOfertaSuper);
 
   const modal = document.getElementById("modal-retencao");
 

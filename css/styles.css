@@ -461,6 +461,14 @@ img { max-width: 100%; display: block; }
   overflow: hidden;
 }
 
+/* ---------- Foto real (já substituiu o placeholder) ---------- */
+
+.foto-real {
+  width: 100%;
+  border-radius: var(--raio);
+  display: block;
+}
+
 /* ---------- Prova social (antes/depois) ---------- */
 
 .caso-social {
@@ -1045,6 +1053,44 @@ input[type="range"].slider-input {
 .bloco-resumo ul { margin: 0 0 14px; padding-left: 20px; font-size: 14px; }
 .bloco-resumo li { margin-bottom: 4px; }
 
+/* ---------- Bio da nutricionista (Etapa 25) ---------- */
+
+.bio-card {
+  background: var(--cor-cartao);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  padding: 22px 20px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+.bio-foto-perfil {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--cor-primaria-clara);
+  margin: 4px auto 10px;
+  display: block;
+}
+.bio-nome {
+  font-weight: 700;
+  font-size: 16px;
+  margin-bottom: 14px;
+}
+.bio-card p {
+  text-align: left;
+  font-size: 14px;
+  color: var(--cor-texto);
+}
+.bio-card p:last-child { margin-bottom: 0; }
+.bio-reforco {
+  text-align: center;
+  font-weight: 700;
+  color: var(--cor-primaria-escura);
+  font-size: 15px;
+  margin: 4px 0 16px;
+}
+
 .conteudo-pendente {
   border: 1px dashed var(--cor-texto-claro);
   border-radius: var(--raio);
@@ -1064,14 +1110,6 @@ input[type="range"].slider-input {
 /* ---------- Prints de conversa (Etapa 22) ---------- */
 
 .conversa-bloco { margin-bottom: 22px; }
-.conversa-citacao {
-  font-size: 14px;
-  font-style: italic;
-  color: var(--cor-texto-suave);
-  text-align: center;
-  margin-top: 8px;
-  padding: 0 10px;
-}
 
 /* ---------- Toasts de compra fake ----------
    Fila estritamente sequencial controlada via JS (nunca duas ao mesmo

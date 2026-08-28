@@ -1,10 +1,7 @@
 ETAPA 0 - Abertura do quiz
 
-Precisa de 1 imagem:
-- Mockup de produto: celular exibindo o app/avaliação + a folha do
-  cardápio impresso ao lado.
-- Proporção sugerida: retrato, algo perto de 480x600 (não precisa ser
-  exato).
+Já recebido e no ar: produto-mockup.webp (mockup do tablet + celular
+exibindo o Plano Alimentar Para Lactantes).
 
-Pode subir com o nome que quiser (jpg ou png). Quando você me avisar
-que terminou, eu confirmo o arquivo e atualizo o quiz.
+Se quiser trocar por outra versão, é só subir o arquivo novo aqui com
+o nome que quiser e me avisar.

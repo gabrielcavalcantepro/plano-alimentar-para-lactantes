@@ -1,0 +1,11 @@
+ETAPA 25 - Bloco "Quem sou eu?" (bio da nutricionista)
+
+Já recebido e no ar:
+- perfil.webp: foto de perfil (avatar circular)
+- destaque.webp: foto de destaque (grávida com a família)
+
+Se quiser trocar qualquer uma das duas, é só subir o arquivo novo
+aqui com o nome que quiser e me avisar.
+
+Ainda falta: o nome dela pra completar o bloco (hoje está como
+"[Nome da nutricionista]" no lugar certo do código).
