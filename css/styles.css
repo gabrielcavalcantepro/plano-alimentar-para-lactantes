@@ -1083,6 +1083,13 @@ input[type="range"].slider-input {
   color: var(--cor-texto);
 }
 .bio-card p:last-child { margin-bottom: 0; }
+.bio-card p.bio-crn {
+  text-align: right;
+  font-size: 11px;
+  color: var(--cor-texto-claro);
+  letter-spacing: 0.02em;
+  margin-top: 10px;
+}
 .bio-reforco {
   text-align: center;
   font-weight: 700;

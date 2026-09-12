@@ -143,6 +143,8 @@ function irPara(indice) {
   const novaEl = document.querySelector(`.etapa[data-etapa="${indice}"]`);
   if (!novaEl) return;
 
+  if (etapaAtual === 0 && indice !== 0) pararContadorSocial();
+
   if (atualEl) atualEl.classList.remove("etapa-ativa");
   novaEl.classList.add("etapa-ativa");
   etapaAtual = indice;
@@ -789,10 +791,43 @@ function mostrarToast() {
 
 /* ---------------------------------------------------------------------
    Contador social (Etapa 0)
+
+   Começa num número aleatório e vai subindo sozinho aos poucos (+1 a
+   +4 por vez, tipo 159 -> 163 -> 164 -> 168...), em intervalos curtos
+   e também aleatórios, pra parecer atividade ao vivo em vez de um
+   número parado ou um crescimento óbvio/constante. Para de crescer
+   com um teto de segurança e também para completamente assim que a
+   pessoa sai da Etapa 0 (não tem como voltar pra ela depois).
    --------------------------------------------------------------------- */
+const CONTADOR_SOCIAL_TETO = 300;
+let contadorSocialValor = 0;
+let timeoutContadorSocial = null;
+
 function iniciarContadorSocial() {
-  const n = aleatorioEntre(140, 160);
-  document.getElementById("contador-texto").textContent = `${n} mamães testando o Plano Alimentar Para Lactantes agora`;
+  contadorSocialValor = aleatorioEntre(140, 160);
+  atualizarTextoContadorSocial();
+  agendarProximoIncrementoContador();
+}
+
+function atualizarTextoContadorSocial() {
+  const el = document.getElementById("contador-texto");
+  if (el) el.textContent = `${contadorSocialValor} mamães testando o Plano Alimentar Para Lactantes agora`;
+}
+
+function agendarProximoIncrementoContador() {
+  if (contadorSocialValor >= CONTADOR_SOCIAL_TETO) return;
+  timeoutContadorSocial = setTimeout(() => {
+    contadorSocialValor = Math.min(CONTADOR_SOCIAL_TETO, contadorSocialValor + aleatorioEntre(1, 4));
+    atualizarTextoContadorSocial();
+    agendarProximoIncrementoContador();
+  }, aleatorioEntre(2500, 6000));
+}
+
+function pararContadorSocial() {
+  if (timeoutContadorSocial) {
+    clearTimeout(timeoutContadorSocial);
+    timeoutContadorSocial = null;
+  }
 }
 
 /* ---------------------------------------------------------------------
