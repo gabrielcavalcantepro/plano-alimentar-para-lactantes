@@ -381,6 +381,14 @@ img { max-width: 100%; display: block; }
   margin-top: 10px;
 }
 
+.rodape-legal {
+  text-align: center;
+  font-size: 10.5px;
+  line-height: 1.6;
+  color: var(--cor-texto-claro);
+  padding: 14px 20px 18px;
+}
+
 /* ---------- Etapa 0: abertura ---------- */
 
 .contador-social {
