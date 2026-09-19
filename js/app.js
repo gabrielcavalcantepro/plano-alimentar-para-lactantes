@@ -8,12 +8,13 @@
    ===================================================================== */
 
 /* ---------------------------------------------------------------------
-   LINK DE CHECKOUT
-   Ainda não temos o link definitivo. Troque o valor abaixo quando a
-   cliente enviar o link real do checkout. É o único lugar do projeto
-   que precisa ser editado.
+   LINKS DE CHECKOUT
+   Um link por oferta (preços diferentes = produtos diferentes no
+   checkout). Troque aqui se algum dia o link mudar, é o único lugar
+   do projeto que precisa ser editado.
    --------------------------------------------------------------------- */
-const CHECKOUT_URL = "PLACEHOLDER";
+const CHECKOUT_URL_SUPER = "https://plano.akilasamara.com.br/?preco=1990";
+const CHECKOUT_URL_BASICO = "https://plano.akilasamara.com.br/?preco=1090";
 
 /* ---------------------------------------------------------------------
    Lista de notificações de compra fake (Etapa 21 em diante).
@@ -834,12 +835,12 @@ function pararContadorSocial() {
    Checkout e modal de retenção (25c / 25h)
    --------------------------------------------------------------------- */
 function irParaCheckout(plano) {
-  if (!CHECKOUT_URL || CHECKOUT_URL === "PLACEHOLDER") {
-    alert("Link de checkout ainda não configurado. Defina CHECKOUT_URL em js/app.js.");
+  const url = plano === "basico" ? CHECKOUT_URL_BASICO : CHECKOUT_URL_SUPER;
+  if (!url) {
+    alert("Link de checkout ainda não configurado.");
     return;
   }
-  const separador = CHECKOUT_URL.includes("?") ? "&" : "?";
-  window.location.href = `${CHECKOUT_URL}${separador}plano=${plano}`;
+  window.location.href = url;
 }
 
 /* Botões fora dos cartões de oferta não vão direto pro checkout (temos
