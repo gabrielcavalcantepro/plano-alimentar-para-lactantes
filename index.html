@@ -7,6 +7,7 @@
 <title>Plano Alimentar Para Lactantes | Diagnóstico Gratuito</title>
 <meta name="description" content="Descubra em 2 minutos seu cardápio personalizado para emagrecer sem atrapalhar a amamentação.">
 <link rel="stylesheet" href="css/styles.css">
+<link rel="preload" as="image" href="assets/etapas/etapa00-abertura/produto-mockup.webp" fetchpriority="high">
 
 <!-- Meta Pixel Code -->
 <script>
@@ -14,10 +15,7 @@
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};
 if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
+n.queue=[]}(window, document,'script');
 fbq('init', '1073323022234648');
 fbq('track', 'PageView');
 </script>
@@ -26,12 +24,34 @@ src="https://www.facebook.com/tr?id=1073323022234648&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
 
-<script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "yhc93lc42y");
+<!--
+  Os scripts pesados do Pixel e do Clarity (113 KB + 25 KB, de domínios
+  externos) só são baixados depois que a página termina de carregar.
+  Isso tira os dois do caminho crítico de carregamento (LCP), sem
+  perder rastreamento: os eventos fbq() acima já ficam na fila e são
+  disparados assim que o fbevents.js real chega.
+-->
+<script>
+function carregarScriptsDeAnaliseAdiados() {
+  var fb = document.createElement("script");
+  fb.async = true;
+  fb.src = "https://connect.facebook.net/en_US/fbevents.js";
+  document.head.appendChild(fb);
+
+  (function (c, l, a, r, i, t, y) {
+    c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); };
+    t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+    y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+  })(window, document, "clarity", "script", "yhc93lc42y");
+}
+
+if (document.readyState === "complete") {
+  setTimeout(carregarScriptsDeAnaliseAdiados, 1200);
+} else {
+  window.addEventListener("load", function () {
+    setTimeout(carregarScriptsDeAnaliseAdiados, 1200);
+  });
+}
 </script>
 
 
@@ -58,7 +78,7 @@ src="https://www.facebook.com/tr?id=1073323022234648&ev=PageView&noscript=1"
       <h1 class="abertura-headline">Elimine os <span class="destaque">quilos da gestação</span> sem atrapalhar a amamentação</h1>
       <p class="abertura-sub">Sem cortar sua energia, sem dietas restritas e sem precisar de tempo que você não tem. Um cardápio feito por nutricionista especializada em lactantes.</p>
 
-      <img class="abertura-imagem foto-real" src="assets/etapas/etapa00-abertura/produto-mockup.webp" alt="Mockup do tablet e celular exibindo o Plano Alimentar Para Lactantes">
+      <img class="abertura-imagem foto-real" loading="eager" fetchpriority="high" decoding="async" width="600" height="409" src="assets/etapas/etapa00-abertura/produto-mockup.webp" alt="Mockup do tablet e celular exibindo o Plano Alimentar Para Lactantes">
 
       <div class="selos">
         <span class="selo">+20 mil mães</span>
@@ -123,19 +143,19 @@ src="https://www.facebook.com/tr?id=1073323022234648&ev=PageView&noscript=1"
       <p class="etapa-subtitulo">Selecione a opção que mais te descreve</p>
       <div class="grade-opcoes" data-tipo="single" data-campo="corpoImagem" data-proxima="3">
         <button type="button" class="opcao-cartao" data-valor="tipo1">
-          <img class="foto-real" src="assets/etapas/etapa02-corpo/tipo1.webp" alt="Ilustração de corpo feminino, tipo 1">
+          <img class="foto-real" loading="lazy" decoding="async" width="600" height="600" src="assets/etapas/etapa02-corpo/tipo1.webp" alt="Ilustração de corpo feminino, tipo 1">
           <span class="opcao-cartao-label">Tipo 1</span>
         </button>
         <button type="button" class="opcao-cartao" data-valor="tipo2">
-          <img class="foto-real" src="assets/etapas/etapa02-corpo/tipo2.webp" alt="Ilustração de corpo feminino, tipo 2">
+          <img class="foto-real" loading="lazy" decoding="async" width="600" height="600" src="assets/etapas/etapa02-corpo/tipo2.webp" alt="Ilustração de corpo feminino, tipo 2">
           <span class="opcao-cartao-label">Tipo 2</span>
         </button>
         <button type="button" class="opcao-cartao" data-valor="tipo3">
-          <img class="foto-real" src="assets/etapas/etapa02-corpo/tipo3.webp" alt="Ilustração de corpo feminino, tipo 3">
+          <img class="foto-real" loading="lazy" decoding="async" width="600" height="600" src="assets/etapas/etapa02-corpo/tipo3.webp" alt="Ilustração de corpo feminino, tipo 3">
           <span class="opcao-cartao-label">Tipo 3</span>
         </button>
         <button type="button" class="opcao-cartao" data-valor="tipo4">
-          <img class="foto-real" src="assets/etapas/etapa02-corpo/tipo4.webp" alt="Ilustração de corpo feminino, tipo 4">
+          <img class="foto-real" loading="lazy" decoding="async" width="600" height="600" src="assets/etapas/etapa02-corpo/tipo4.webp" alt="Ilustração de corpo feminino, tipo 4">
           <span class="opcao-cartao-label">Tipo 4</span>
         </button>
       </div>
@@ -282,21 +302,21 @@ src="https://www.facebook.com/tr?id=1073323022234648&ev=PageView&noscript=1"
       <h2 class="etapa-titulo">Veja as transformações de quem já usou o Plano Alimentar</h2>
 
       <div class="caso-social">
-        <img class="foto-real" src="assets/etapas/etapa08-prova-social-1/caso-01.webp" alt="Foto antes e depois real, caso 1">
+        <img class="foto-real" loading="lazy" decoding="async" width="800" height="800" src="assets/etapas/etapa08-prova-social-1/caso-01.webp" alt="Foto antes e depois real, caso 1">
         <span class="caso-tag-resultado oculto">[Resultado real: -X kg em Y semanas]</span>
         <p class="caso-depoimento oculto">"[Depoimento real da paciente entra aqui.]"</p>
         <p class="caso-autor oculto">[Nome], [idade] anos, [Cidade]</p>
       </div>
 
       <div class="caso-social">
-        <img class="foto-real" src="assets/etapas/etapa08-prova-social-1/caso-02.webp" alt="Foto antes e depois real, caso 2">
+        <img class="foto-real" loading="lazy" decoding="async" width="800" height="800" src="assets/etapas/etapa08-prova-social-1/caso-02.webp" alt="Foto antes e depois real, caso 2">
         <span class="caso-tag-resultado oculto">[Resultado real: -X kg em Y semanas]</span>
         <p class="caso-depoimento oculto">"[Depoimento real da paciente entra aqui.]"</p>
         <p class="caso-autor oculto">[Nome], [idade] anos, [Cidade]</p>
       </div>
 
       <div class="caso-social">
-        <img class="foto-real" src="assets/etapas/etapa08-prova-social-1/caso-03.webp" alt="Foto antes e depois real, caso 3">
+        <img class="foto-real" loading="lazy" decoding="async" width="800" height="800" src="assets/etapas/etapa08-prova-social-1/caso-03.webp" alt="Foto antes e depois real, caso 3">
         <span class="caso-tag-resultado oculto">[Resultado real: -X kg em Y semanas]</span>
         <p class="caso-depoimento oculto">"[Depoimento real da paciente entra aqui.]"</p>
         <p class="caso-autor oculto">[Nome], [idade] anos, [Cidade]</p>
@@ -376,9 +396,9 @@ src="https://www.facebook.com/tr?id=1073323022234648&ev=PageView&noscript=1"
         💚 O Plano Alimentar Para Lactantes foi desenhado do outro jeito: pensado para aumentar a produção de leite e, ao mesmo tempo, acelerar a queima de gordura, sem passar fome e sem comprometer sua energia.
       </div>
 
-      <img class="foto-real" src="assets/etapas/etapa12-depoimento/depoimento-01.webp" alt="Print real de depoimento de paciente" style="margin-bottom:12px;">
-      <img class="foto-real" src="assets/etapas/etapa12-depoimento/depoimento-02.webp" alt="Print real de depoimento de paciente" style="margin-bottom:12px;">
-      <img class="foto-real" src="assets/etapas/etapa12-depoimento/depoimento-03.webp" alt="Print real de depoimento de paciente">
+      <img class="foto-real" loading="lazy" decoding="async" width="800" height="474" src="assets/etapas/etapa12-depoimento/depoimento-01.webp" alt="Print real de depoimento de paciente" style="margin-bottom:12px;">
+      <img class="foto-real" loading="lazy" decoding="async" width="800" height="608" src="assets/etapas/etapa12-depoimento/depoimento-02.webp" alt="Print real de depoimento de paciente" style="margin-bottom:12px;">
+      <img class="foto-real" loading="lazy" decoding="async" width="800" height="487" src="assets/etapas/etapa12-depoimento/depoimento-03.webp" alt="Print real de depoimento de paciente">
 
       <!-- Depoimento ainda fictício, placeholder até a cliente enviar o texto real -->
       <div class="bloco-borda-destaque">
@@ -410,7 +430,7 @@ src="https://www.facebook.com/tr?id=1073323022234648&ev=PageView&noscript=1"
       <span class="tag-pill">🔥 Menos inchaço, resultado real</span>
       <h2 class="etapa-titulo" style="font-size:21px;">Por que algumas mães <span class="destaque">emagrecem fácil</span> enquanto você luta para perder qualquer quilo?</h2>
 
-      <img class="foto-real" src="assets/etapas/etapa13-antes-depois/antes-depois.webp" alt="Foto antes e depois real" style="margin-bottom:16px;">
+      <img class="foto-real" loading="lazy" decoding="async" width="800" height="1310" src="assets/etapas/etapa13-antes-depois/antes-depois.webp" alt="Foto antes e depois real" style="margin-bottom:16px;">
 
       <p>Dieta restritiva no pós-parto retém líquido e acumula inflamação. A causa costuma ser cortisol elevado, sono ruim e uma alimentação desajustada pra essa fase. O resultado é o peso travado mesmo quando você sente que está "fazendo tudo certo".</p>
 
@@ -609,19 +629,19 @@ src="https://www.facebook.com/tr?id=1073323022234648&ev=PageView&noscript=1"
       <p class="etapa-subtitulo" style="text-align:center;">Conversas reais entre a nutricionista e pacientes</p>
 
       <div class="conversa-bloco">
-        <img class="foto-real" src="assets/etapas/etapa22-conversas/conversa-01.webp" alt="Print real de conversa 1">
+        <img class="foto-real" loading="lazy" decoding="async" width="800" height="328" src="assets/etapas/etapa22-conversas/conversa-01.webp" alt="Print real de conversa 1">
       </div>
       <div class="conversa-bloco">
-        <img class="foto-real" src="assets/etapas/etapa22-conversas/conversa-02.webp" alt="Print real de conversa 2">
+        <img class="foto-real" loading="lazy" decoding="async" width="800" height="548" src="assets/etapas/etapa22-conversas/conversa-02.webp" alt="Print real de conversa 2">
       </div>
       <div class="conversa-bloco">
-        <img class="foto-real" src="assets/etapas/etapa22-conversas/conversa-03.webp" alt="Print real de conversa 3">
+        <img class="foto-real" loading="lazy" decoding="async" width="800" height="875" src="assets/etapas/etapa22-conversas/conversa-03.webp" alt="Print real de conversa 3">
       </div>
       <div class="conversa-bloco">
-        <img class="foto-real" src="assets/etapas/etapa22-conversas/conversa-04.webp" alt="Print real de conversa 4">
+        <img class="foto-real" loading="lazy" decoding="async" width="800" height="753" src="assets/etapas/etapa22-conversas/conversa-04.webp" alt="Print real de conversa 4">
       </div>
       <div class="conversa-bloco">
-        <img class="foto-real" src="assets/etapas/etapa22-conversas/conversa-05.webp" alt="Print real de conversa 5">
+        <img class="foto-real" loading="lazy" decoding="async" width="800" height="287" src="assets/etapas/etapa22-conversas/conversa-05.webp" alt="Print real de conversa 5">
       </div>
 
       <div class="bloco-borda-destaque">
@@ -656,7 +676,7 @@ src="https://www.facebook.com/tr?id=1073323022234648&ev=PageView&noscript=1"
 
         <div class="loading-social" id="loading-social">
           <div class="caso-social">
-            <img class="foto-real" src="assets/etapas/etapa23-loading/antes-depois.webp" alt="Foto antes e depois real, resultado verificado">
+            <img class="foto-real" loading="lazy" decoding="async" width="800" height="1149" src="assets/etapas/etapa23-loading/antes-depois.webp" alt="Foto antes e depois real, resultado verificado">
             <span class="caso-tag-resultado">Resultado Verificado</span>
             <p class="caso-depoimento oculto">"[Depoimento curto real entra aqui.]"</p>
           </div>
@@ -818,19 +838,19 @@ src="https://www.facebook.com/tr?id=1073323022234648&ev=PageView&noscript=1"
       <h3 class="secao-titulo-menor">Mais de 20 mil mães estão secando de forma saudável e segura com o Plano Alimentar!</h3>
 
       <div class="caso-social">
-        <img class="foto-real" src="assets/etapas/etapa25-prova-social-2/caso-01.webp" alt="Foto antes e depois real, oferta final, caso 1">
+        <img class="foto-real" loading="lazy" decoding="async" width="800" height="1005" src="assets/etapas/etapa25-prova-social-2/caso-01.webp" alt="Foto antes e depois real, oferta final, caso 1">
         <span class="caso-tag-resultado oculto">[Resultado real: -X kg em Y semanas]</span>
         <p class="caso-depoimento oculto">"[Depoimento real da paciente entra aqui.]"</p>
         <p class="caso-autor oculto">[Nome], [idade] anos, [Cidade]</p>
       </div>
       <div class="caso-social">
-        <img class="foto-real" src="assets/etapas/etapa25-prova-social-2/caso-02.webp" alt="Foto antes e depois real, oferta final, caso 2">
+        <img class="foto-real" loading="lazy" decoding="async" width="800" height="1005" src="assets/etapas/etapa25-prova-social-2/caso-02.webp" alt="Foto antes e depois real, oferta final, caso 2">
         <span class="caso-tag-resultado oculto">[Resultado real: -X kg em Y semanas]</span>
         <p class="caso-depoimento oculto">"[Depoimento real da paciente entra aqui.]"</p>
         <p class="caso-autor oculto">[Nome], [idade] anos, [Cidade]</p>
       </div>
       <div class="caso-social">
-        <img class="foto-real" src="assets/etapas/etapa25-prova-social-2/caso-03.webp" alt="Foto antes e depois real, oferta final, caso 3">
+        <img class="foto-real" loading="lazy" decoding="async" width="800" height="1685" src="assets/etapas/etapa25-prova-social-2/caso-03.webp" alt="Foto antes e depois real, oferta final, caso 3">
         <span class="caso-tag-resultado oculto">[Resultado real: -X kg em Y semanas]</span>
         <p class="caso-depoimento oculto">"[Depoimento real da paciente entra aqui.]"</p>
         <p class="caso-autor oculto">[Nome], [idade] anos, [Cidade]</p>
@@ -854,7 +874,7 @@ src="https://www.facebook.com/tr?id=1073323022234648&ev=PageView&noscript=1"
       <!-- 25g: bio da nutricionista -->
       <div class="bio-card">
         <span class="tag-pill">👋 Quem sou eu?</span>
-        <img class="bio-foto-perfil" src="assets/etapas/etapa25-bio/perfil.webp" alt="Foto de Ákila Samara">
+        <img class="bio-foto-perfil" loading="lazy" decoding="async" width="1080" height="1080" src="assets/etapas/etapa25-bio/perfil.webp" alt="Foto de Ákila Samara">
         <p class="bio-nome">Ákila Samara</p>
         <p>Sou nutricionista desde 2016 e, durante quase toda a minha vida adulta, sempre tive um biotipo magro. Achava que comer sem me preocupar seria minha realidade para sempre. Então a maternidade mudou tudo.</p>
         <p>Engravidei com 69 kg e cheguei ao fim da gestação com 83 kg. Depois do parto vieram as noites mal dormidas, a ansiedade e o cansaço, e eu buscava conforto na comida. Sem perceber, entrei num ciclo de compulsão alimentar que me manteve cerca de 8 kg acima do meu peso por oito meses.</p>
@@ -863,7 +883,7 @@ src="https://www.facebook.com/tr?id=1073323022234648&ev=PageView&noscript=1"
         <p class="bio-crn">CRN/9 29522</p>
       </div>
 
-      <img class="foto-real" src="assets/etapas/etapa25-bio/destaque.webp" alt="Foto da nutricionista grávida, com a família" style="margin-bottom:14px;">
+      <img class="foto-real" loading="lazy" decoding="async" width="750" height="750" src="assets/etapas/etapa25-bio/destaque.webp" alt="Foto da nutricionista grávida, com a família" style="margin-bottom:14px;">
       <p class="bio-reforco">Eu vivi essa transformação e agora é a sua vez! Aproveite agora, você não vai encontrar essa oferta depois.</p>
       <button type="button" class="btn btn-primario btn-grande" id="btn-checkout-bio">✅ Quero garantir meu acesso agora →</button>
 
