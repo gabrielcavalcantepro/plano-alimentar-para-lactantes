@@ -473,6 +473,7 @@ img { max-width: 100%; display: block; }
 
 .foto-real {
   width: 100%;
+  height: auto;
   border-radius: var(--raio);
   display: block;
 }
