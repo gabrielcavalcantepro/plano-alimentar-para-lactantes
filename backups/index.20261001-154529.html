@@ -1075,32 +1075,6 @@ input[type="range"].slider-input {
 .bloco-resumo ul { margin: 0 0 14px; padding-left: 20px; font-size: 14px; }
 .bloco-resumo li { margin-bottom: 4px; }
 
-/* ---------- Mini bio, antes do preço (Etapa 25) ---------- */
-
-.mini-bio-card {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  background: var(--cor-cartao);
-  border: 1px solid var(--cor-borda);
-  border-radius: var(--raio);
-  padding: 16px;
-  margin-bottom: 16px;
-}
-.mini-bio-foto {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid var(--cor-primaria-clara);
-  flex-shrink: 0;
-}
-.mini-bio-card p {
-  font-size: 13px;
-  color: var(--cor-texto);
-  margin: 0;
-}
-
 /* ---------- Bio da nutricionista (Etapa 25) ---------- */
 
 .bio-card {
@@ -1326,13 +1300,14 @@ if (document.readyState === "complete") {
         <span id="contador-texto">carregando...</span>
       </div>
 
-      <h1 class="abertura-headline">Volte a vestir suas <span class="destaque">roupas de antes da gestação</span> em 8 semanas, sem secar o leite</h1>
+      <h1 class="abertura-headline">Elimine os <span class="destaque">quilos da gestação</span> sem atrapalhar a amamentação</h1>
       <p class="abertura-sub">Sem cortar sua energia, sem dietas restritas e sem precisar de tempo que você não tem. Um cardápio feito por nutricionista especializada em lactantes.</p>
 
       <img class="abertura-imagem foto-real" loading="eager" fetchpriority="high" decoding="async" width="460" height="314" src="assets/etapas/etapa00-abertura/produto-mockup.webp" alt="Mockup do tablet e celular exibindo o Plano Alimentar Para Lactantes">
 
       <div class="selos">
         <span class="selo">+20 mil mães</span>
+        <span class="selo">100% Natural</span>
         <span class="selo">Mantém o Leite</span>
       </div>
 
@@ -1340,8 +1315,8 @@ if (document.readyState === "complete") {
         <strong>⚠️ Atenção:</strong> Esta avaliação está disponível somente uma vez por pessoa. Se sair agora, você pode perder sua oportunidade.
       </div>
 
-      <button type="button" class="btn btn-primario btn-grande" id="btn-iniciar-quiz">Fazer meu diagnóstico grátis →</button>
-      <p class="microcopy">Diagnóstico Grátis · Cerca de 3 minutos</p>
+      <button type="button" class="btn btn-primario btn-grande" id="btn-iniciar-quiz">Quero meu Cardápio Personalizado!</button>
+      <p class="microcopy">Diagnóstico Grátis · Apenas 2 minutos</p>
     </section>
 
     <!-- ===================== ETAPA 1 - IDADE ===================== -->
@@ -1353,30 +1328,35 @@ if (document.readyState === "complete") {
           <span class="opcao-icone">🌱</span>
           <span class="opcao-texto">
             <span class="opcao-label">18 a 24 anos</span>
+            <span class="opcao-sub">Metabolismo rápido, ótimo momento para criar hábitos que duram</span>
           </span>
         </button>
         <button type="button" class="opcao" data-valor="25-29">
           <span class="opcao-icone">🌸</span>
           <span class="opcao-texto">
             <span class="opcao-label">25 a 29 anos</span>
+            <span class="opcao-sub">Seu corpo ainda responde muito bem a pequenos ajustes</span>
           </span>
         </button>
         <button type="button" class="opcao" data-valor="30-34">
           <span class="opcao-icone">🌿</span>
           <span class="opcao-texto">
             <span class="opcao-label">30 a 34 anos</span>
+            <span class="opcao-sub">Com o cardápio certo, o metabolismo volta a colaborar com você</span>
           </span>
         </button>
         <button type="button" class="opcao" data-valor="35-39">
           <span class="opcao-icone">🍃</span>
           <span class="opcao-texto">
             <span class="opcao-label">35 a 39 anos</span>
+            <span class="opcao-sub">Ainda dá tempo de reequilibrar tudo com calma e sem pressa</span>
           </span>
         </button>
         <button type="button" class="opcao" data-valor="40+">
           <span class="opcao-icone">🌷</span>
           <span class="opcao-texto">
             <span class="opcao-label">40 anos ou mais</span>
+            <span class="opcao-sub">Sua experiência ajuda na consistência, isso pesa a seu favor</span>
           </span>
         </button>
       </div>
@@ -1436,7 +1416,7 @@ if (document.readyState === "complete") {
 
     <!-- ===================== ETAPA 4 - CORPO (TEXTO) ===================== -->
     <section class="etapa" id="etapa-4" data-etapa="4">
-      <h2 class="etapa-titulo">Qual dessas frases mais parece com você?</h2>
+      <h2 class="etapa-titulo">Como você descreveria seu <span class="destaque">corpo</span> hoje?</h2>
       <p class="etapa-subtitulo">Seja honesta, isso personaliza sua solução</p>
       <div class="lista-opcoes" data-tipo="single" data-campo="corpoTexto" data-proxima="5">
         <button type="button" class="opcao" data-valor="gordura-acumulada">
@@ -1496,7 +1476,7 @@ if (document.readyState === "complete") {
     <section class="etapa" id="etapa-6" data-etapa="6">
       <h2 class="etapa-titulo">Há quanto tempo você está <span class="destaque">amamentando</span>?</h2>
       <p class="etapa-subtitulo">Isso personaliza o seu cardápio</p>
-      <div class="lista-opcoes" data-tipo="single" data-campo="tempoAmamentando" data-proxima="n1">
+      <div class="lista-opcoes" data-tipo="single" data-campo="tempoAmamentando" data-proxima="7">
         <button type="button" class="opcao" data-valor="menos-1-mes">
           <span class="opcao-icone">👶</span>
           <span class="opcao-texto"><span class="opcao-label">Menos de 1 mês</span></span>
@@ -1516,39 +1496,28 @@ if (document.readyState === "complete") {
       </div>
     </section>
 
-    <!-- ===================== ETAPA N1 - O QUE JÁ TENTOU ===================== -->
-    <section class="etapa" id="etapa-n1" data-etapa="n1">
-      <h2 class="etapa-titulo">O que você já <span class="destaque">tentou</span> para emagrecer?</h2>
-      <p class="etapa-subtitulo">Pode selecionar mais de uma opção</p>
-      <div class="lista-opcoes" data-tipo="multi" data-campo="jaTentou" id="opcoes-etapa-n1">
-        <button type="button" class="opcao" data-valor="dieta-restritiva">
-          <span class="opcao-icone">🥗</span>
-          <span class="opcao-texto"><span class="opcao-label">Dieta restritiva ou cortar carboidrato</span></span>
-          <span class="opcao-check">✓</span>
+    <!-- ===================== ETAPA 7 - PESO ACIMA DO IDEAL ===================== -->
+    <section class="etapa" id="etapa-7" data-etapa="7">
+      <h2 class="etapa-titulo">Quanto acima do seu peso ideal você está hoje?</h2>
+      <p class="etapa-subtitulo">Seja honesta, isso personaliza sua solução</p>
+      <div class="lista-opcoes" data-tipo="single" data-campo="pesoAcima" data-proxima="8">
+        <button type="button" class="opcao" data-valor="ate-5kg">
+          <span class="opcao-icone">🟢</span>
+          <span class="opcao-texto"><span class="opcao-label">Até 5 kg</span></span>
         </button>
-        <button type="button" class="opcao" data-valor="chas-shakes-suplementos">
-          <span class="opcao-icone">🍵</span>
-          <span class="opcao-texto"><span class="opcao-label">Chás, shakes ou suplementos</span></span>
-          <span class="opcao-check">✓</span>
+        <button type="button" class="opcao" data-valor="5-10kg">
+          <span class="opcao-icone">🟡</span>
+          <span class="opcao-texto"><span class="opcao-label">5 a 10 kg</span></span>
         </button>
-        <button type="button" class="opcao" data-valor="exercicio-sem-ajustar">
-          <span class="opcao-icone">🏃‍♀️</span>
-          <span class="opcao-texto"><span class="opcao-label">Exercício sem ajustar a alimentação</span></span>
-          <span class="opcao-check">✓</span>
+        <button type="button" class="opcao" data-valor="10-20kg">
+          <span class="opcao-icone">🟠</span>
+          <span class="opcao-texto"><span class="opcao-label">10 a 20 kg</span></span>
         </button>
-        <button type="button" class="opcao" data-valor="plano-nao-encaixou">
-          <span class="opcao-icone">👩‍⚕️</span>
-          <span class="opcao-texto"><span class="opcao-label">Plano de nutricionista que não encaixou na amamentação</span></span>
-          <span class="opcao-check">✓</span>
-        </button>
-        <button type="button" class="opcao" data-valor="nenhuma" data-exclusiva="true">
-          <span class="opcao-icone">🤷‍♀️</span>
-          <span class="opcao-texto"><span class="opcao-label">Ainda não tentei nada</span></span>
-          <span class="opcao-check">✓</span>
+        <button type="button" class="opcao" data-valor="mais-20kg">
+          <span class="opcao-icone">🔴</span>
+          <span class="opcao-texto"><span class="opcao-label">Mais de 20 kg</span></span>
         </button>
       </div>
-      <div class="bloco-borda-destaque oculto" id="box-etapa-n1"></div>
-      <button type="button" class="btn btn-primario oculto" id="btn-continuar-n1" style="margin-top:14px;">Continuar →</button>
     </section>
 
     <!-- ===================== ETAPA 8 - PROVA SOCIAL #1 ===================== -->
@@ -1559,14 +1528,23 @@ if (document.readyState === "complete") {
 
       <div class="caso-social">
         <img class="foto-real" loading="lazy" decoding="async" width="800" height="800" src="assets/etapas/etapa08-prova-social-1/caso-01.webp" alt="Foto antes e depois real, caso 1">
+        <span class="caso-tag-resultado oculto">[Resultado real: -X kg em Y semanas]</span>
+        <p class="caso-depoimento oculto">"[Depoimento real da paciente entra aqui.]"</p>
+        <p class="caso-autor oculto">[Nome], [idade] anos, [Cidade]</p>
       </div>
 
       <div class="caso-social">
         <img class="foto-real" loading="lazy" decoding="async" width="800" height="800" src="assets/etapas/etapa08-prova-social-1/caso-02.webp" alt="Foto antes e depois real, caso 2">
+        <span class="caso-tag-resultado oculto">[Resultado real: -X kg em Y semanas]</span>
+        <p class="caso-depoimento oculto">"[Depoimento real da paciente entra aqui.]"</p>
+        <p class="caso-autor oculto">[Nome], [idade] anos, [Cidade]</p>
       </div>
 
       <div class="caso-social">
         <img class="foto-real" loading="lazy" decoding="async" width="800" height="800" src="assets/etapas/etapa08-prova-social-1/caso-03.webp" alt="Foto antes e depois real, caso 3">
+        <span class="caso-tag-resultado oculto">[Resultado real: -X kg em Y semanas]</span>
+        <p class="caso-depoimento oculto">"[Depoimento real da paciente entra aqui.]"</p>
+        <p class="caso-autor oculto">[Nome], [idade] anos, [Cidade]</p>
       </div>
 
       <button type="button" class="btn btn-primario" id="btn-continuar-8">Continuar minha avaliação →</button>
@@ -1586,7 +1564,7 @@ if (document.readyState === "complete") {
     <section class="etapa" id="etapa-10" data-etapa="10">
       <h2 class="etapa-titulo"><span data-bind="nome-etapa10">Mamãe</span>, como você está se sentindo no <span class="destaque">pós-parto</span>?</h2>
       <p class="etapa-subtitulo">Selecione o que mais se aplica a você</p>
-      <div class="lista-opcoes" data-tipo="single" data-campo="posParto" data-proxima="n2">
+      <div class="lista-opcoes" data-tipo="single" data-campo="posParto" data-proxima="11">
         <button type="button" class="opcao" data-valor="exausta">
           <span class="opcao-icone">😮‍💨</span>
           <span class="opcao-texto"><span class="opcao-label">Exausta e sem energia</span></span>
@@ -1606,72 +1584,11 @@ if (document.readyState === "complete") {
       </div>
     </section>
 
-    <!-- ===================== ETAPA N2 - ESPELHO ===================== -->
-    <section class="etapa" id="etapa-n2" data-etapa="n2">
-      <h2 class="etapa-titulo"><span data-bind="nome-etapa-n2">Mamãe</span>, o que você sente quando se <span class="destaque">olha no espelho</span> hoje?</h2>
-      <p class="etapa-subtitulo">Seja sincera, não existe resposta errada</p>
-      <div class="lista-opcoes" data-tipo="single" data-campo="espelho" data-manual="true" id="opcoes-etapa-n2">
-        <button type="button" class="opcao" data-valor="nao-me-reconheco">
-          <span class="opcao-icone">😔</span>
-          <span class="opcao-texto"><span class="opcao-label">Não me reconheço</span></span>
-        </button>
-        <button type="button" class="opcao" data-valor="saudade-corpo-antes">
-          <span class="opcao-icone">💭</span>
-          <span class="opcao-texto"><span class="opcao-label">Tenho saudade do meu corpo de antes</span></span>
-        </button>
-        <button type="button" class="opcao" data-valor="evito-fotos">
-          <span class="opcao-icone">📸</span>
-          <span class="opcao-texto"><span class="opcao-label">Evito fotos</span></span>
-        </button>
-        <button type="button" class="opcao" data-valor="bem-mas-quero-melhor">
-          <span class="opcao-icone">🙂</span>
-          <span class="opcao-texto"><span class="opcao-label">Estou bem, mas quero me sentir melhor</span></span>
-        </button>
-      </div>
-      <div class="bloco-borda-destaque oculto" id="box-etapa-n2"></div>
-      <button type="button" class="btn btn-primario oculto" id="btn-continuar-n2" style="margin-top:14px;">Continuar →</button>
-    </section>
-
-    <!-- ===================== ETAPA N3 - ALIMENTAÇÃO PÓS-BEBÊ ===================== -->
-    <section class="etapa" id="etapa-n3" data-etapa="n3">
-      <h2 class="etapa-titulo">Como ficou a sua <span class="destaque">alimentação</span> depois que o bebê nasceu?</h2>
-      <p class="etapa-subtitulo">Pode selecionar mais de uma opção</p>
-      <div class="lista-opcoes" data-tipo="multi" data-campo="alimentacaoPosBebe" id="opcoes-etapa-n3">
-        <button type="button" class="opcao" data-valor="sobra-prato">
-          <span class="opcao-icone">🍽️</span>
-          <span class="opcao-texto"><span class="opcao-label">Como o que sobra do prato do bebê ou da família</span></span>
-          <span class="opcao-check">✓</span>
-        </button>
-        <button type="button" class="opcao" data-valor="em-pe-entre-mamadas">
-          <span class="opcao-icone">⏩</span>
-          <span class="opcao-texto"><span class="opcao-label">Como em pé, entre uma mamada e outra</span></span>
-          <span class="opcao-check">✓</span>
-        </button>
-        <button type="button" class="opcao" data-valor="pulo-e-exagero">
-          <span class="opcao-icone">🕐</span>
-          <span class="opcao-texto"><span class="opcao-label">Pulo refeições e depois exagero</span></span>
-          <span class="opcao-check">✓</span>
-        </button>
-        <button type="button" class="opcao" data-valor="belisco-doce">
-          <span class="opcao-icone">🍫</span>
-          <span class="opcao-texto"><span class="opcao-label">Belisco doce para aguentar</span></span>
-          <span class="opcao-check">✓</span>
-        </button>
-        <button type="button" class="opcao" data-valor="delivery-nao-sei-cozinhar">
-          <span class="opcao-icone">🛵</span>
-          <span class="opcao-texto"><span class="opcao-label">Peço delivery porque não sei o que cozinhar</span></span>
-          <span class="opcao-check">✓</span>
-        </button>
-      </div>
-      <div class="bloco-borda-destaque oculto" id="box-etapa-n3"></div>
-      <button type="button" class="btn btn-primario oculto" id="btn-continuar-n3" style="margin-top:14px;">Continuar →</button>
-    </section>
-
     <!-- ===================== ETAPA 11 - O QUE TRAVOU RESULTADOS ===================== -->
     <section class="etapa" id="etapa-11" data-etapa="11">
       <h2 class="etapa-titulo">O que mais tem travado seus resultados?</h2>
       <p class="etapa-subtitulo">Escolha a opção mais próxima da sua realidade</p>
-      <div class="lista-opcoes" data-tipo="single" data-campo="travouResultados" data-proxima="n4">
+      <div class="lista-opcoes" data-tipo="single" data-campo="travouResultados" data-proxima="12">
         <button type="button" class="opcao" data-valor="peso-nao-cai">
           <span class="opcao-icone">📉</span>
           <span class="opcao-texto"><span class="opcao-label">Tento, mas o peso não cai</span></span>
@@ -1691,58 +1608,6 @@ if (document.readyState === "complete") {
       </div>
     </section>
 
-    <!-- ===================== ETAPA N4 - QUANDO A COMIDA DOMINA ===================== -->
-    <section class="etapa" id="etapa-n4" data-etapa="n4">
-      <h2 class="etapa-titulo">Em que momento a comida mais <span class="destaque">te domina</span>?</h2>
-      <p class="etapa-subtitulo">Escolha o momento mais difícil para você</p>
-      <div class="lista-opcoes" data-tipo="single" data-campo="momentoComida" data-manual="true" id="opcoes-etapa-n4">
-        <button type="button" class="opcao" data-valor="manha">
-          <span class="opcao-icone">🌅</span>
-          <span class="opcao-texto"><span class="opcao-label">De manhã, na correria</span></span>
-        </button>
-        <button type="button" class="opcao" data-valor="tarde">
-          <span class="opcao-icone">🌤️</span>
-          <span class="opcao-texto"><span class="opcao-label">À tarde</span></span>
-        </button>
-        <button type="button" class="opcao" data-valor="noite">
-          <span class="opcao-icone">🌙</span>
-          <span class="opcao-texto"><span class="opcao-label">À noite, quando o bebê dorme</span></span>
-        </button>
-        <button type="button" class="opcao" data-valor="madrugada">
-          <span class="opcao-icone">🌌</span>
-          <span class="opcao-texto"><span class="opcao-label">Na madrugada, nas mamadas</span></span>
-        </button>
-        <button type="button" class="opcao" data-valor="ansiosa-cansada">
-          <span class="opcao-icone">😰</span>
-          <span class="opcao-texto"><span class="opcao-label">Quando estou ansiosa ou cansada</span></span>
-        </button>
-      </div>
-      <div class="bloco-borda-destaque oculto" id="box-etapa-n4"></div>
-      <button type="button" class="btn btn-primario oculto" id="btn-continuar-n4" style="margin-top:14px;">Continuar →</button>
-    </section>
-
-    <!-- ===================== ETAPA N5 - SONO ===================== -->
-    <section class="etapa" id="etapa-n5" data-etapa="n5">
-      <h2 class="etapa-titulo">Quantas horas você consegue <span class="destaque">dormir</span> por noite, somando os cochilos?</h2>
-      <p class="etapa-subtitulo">Entre uma mamada e outra, conta tudo</p>
-      <div class="lista-opcoes" data-tipo="single" data-campo="sono" data-manual="true" id="opcoes-etapa-n5">
-        <button type="button" class="opcao" data-valor="menos-4h">
-          <span class="opcao-icone">😵</span>
-          <span class="opcao-texto"><span class="opcao-label">Menos de 4h</span></span>
-        </button>
-        <button type="button" class="opcao" data-valor="4-5h">
-          <span class="opcao-icone">😴</span>
-          <span class="opcao-texto"><span class="opcao-label">4 a 5h</span></span>
-        </button>
-        <button type="button" class="opcao" data-valor="6h-mais">
-          <span class="opcao-icone">🌙</span>
-          <span class="opcao-texto"><span class="opcao-label">6h ou mais</span></span>
-        </button>
-      </div>
-      <div class="bloco-borda-destaque oculto" id="box-etapa-n5"></div>
-      <button type="button" class="btn btn-primario oculto" id="btn-continuar-n5" style="margin-top:14px;">Continuar →</button>
-    </section>
-
     <!-- ===================== ETAPA 12 - BLOCO EDUCACIONAL + DEPOIMENTO ===================== -->
     <section class="etapa" id="etapa-12" data-etapa="12">
       <div class="bloco-educacional">
@@ -1759,6 +1624,11 @@ if (document.readyState === "complete") {
       <img class="foto-real" loading="lazy" decoding="async" width="800" height="474" src="assets/etapas/etapa12-depoimento/depoimento-01.webp" alt="Print real de depoimento de paciente" style="margin-bottom:12px;">
       <img class="foto-real" loading="lazy" decoding="async" width="800" height="608" src="assets/etapas/etapa12-depoimento/depoimento-02.webp" alt="Print real de depoimento de paciente" style="margin-bottom:12px;">
       <img class="foto-real" loading="lazy" decoding="async" width="800" height="487" src="assets/etapas/etapa12-depoimento/depoimento-03.webp" alt="Print real de depoimento de paciente">
+
+      <!-- Depoimento ainda fictício, placeholder até a cliente enviar o texto real -->
+      <div class="bloco-borda-destaque">
+        🎉 Uma paciente aumentou a produção de leite e desinchou em apenas duas semanas seguindo o Plano Alimentar!
+      </div>
 
       <div class="comparacao-box">
         <div class="comparacao-col sem">
@@ -1957,6 +1827,27 @@ if (document.readyState === "complete") {
       <button type="button" class="btn btn-primario oculto" id="btn-continuar-20" style="margin-top:14px;">Continuar →</button>
     </section>
 
+    <!-- ===================== ETAPA 21 - RESULTADO, PROJEÇÃO ===================== -->
+    <section class="etapa" id="etapa-21" data-etapa="21">
+      <div class="faixa-resultado">
+        <p class="faixa-resultado-eyebrow">🎯 Com base no seu diagnóstico...</p>
+        <h2 class="faixa-resultado-titulo">Prevemos que você pesará <span class="valor-inv" data-bind="peso-desejado-21">60</span> kg até <span class="valor-inv" data-bind="data-final-21">--</span>!</h2>
+        <p class="faixa-resultado-sub">🎊 Boa notícia! Sua meta é alcançável</p>
+      </div>
+
+      <div class="grafico-box">
+        <canvas id="grafico-21" width="400" height="220" role="img" aria-label="Gráfico de projeção de peso ao longo do tempo"></canvas>
+      </div>
+
+      <div class="tabela-projecao" id="tabela-projecao-21"></div>
+
+      <div class="bloco-borda-destaque">
+        🎊 <span id="texto-projecao-21">Seguindo o Plano Alimentar Para Lactantes, você pode chegar com o corpo que deseja sem parar de amamentar e sem dietas restritivas!</span>
+      </div>
+
+      <button type="button" class="btn btn-primario btn-grande" id="btn-continuar-21">Ver meu Cardápio Completo →</button>
+    </section>
+
     <!-- ===================== ETAPA 22 - PROVA SOCIAL #2 (CONVERSAS) ===================== -->
     <section class="etapa" id="etapa-22" data-etapa="22">
       <h2 class="etapa-titulo" style="font-size:20px; text-align:center;">O que as mamães estão dizendo</h2>
@@ -1991,24 +1882,6 @@ if (document.readyState === "complete") {
       <button type="button" class="btn btn-primario" id="btn-continuar-22">Continuar →</button>
     </section>
 
-    <!-- ===================== ETAPA BIO - QUEM SOU EU ===================== -->
-    <section class="etapa" id="etapa-bio" data-etapa="bio">
-      <div class="bio-card">
-        <span class="tag-pill">👋 Quem sou eu?</span>
-        <img class="bio-foto-perfil" loading="lazy" decoding="async" width="1080" height="1080" src="assets/etapas/etapa25-bio/perfil.webp" alt="Foto de Ákila Samara">
-        <p class="bio-nome">Ákila Samara</p>
-        <p>Sou nutricionista desde 2016 e, durante quase toda a minha vida adulta, sempre tive um biotipo magro. Achava que comer sem me preocupar seria minha realidade para sempre. Então a maternidade mudou tudo.</p>
-        <p>Engravidei com 69 kg e cheguei ao fim da gestação com 83 kg. Depois do parto vieram as noites mal dormidas, a ansiedade e o cansaço, e eu buscava conforto na comida. Sem perceber, entrei num ciclo de compulsão alimentar que me manteve cerca de 8 kg acima do meu peso por oito meses.</p>
-        <p>O mais difícil não era o número da balança, era não me reconhecer no espelho. Até que decidi mudar, não só o corpo, mas a forma como eu lidava com minhas emoções. Reorganizei minha rotina e minha alimentação, e eliminei 10 kg em apenas 3 meses.</p>
-        <p>Hoje, quando acompanho outras mães, entendo exatamente o que elas sentem, porque eu vivi isso. Se você está nesse ciclo agora, saiba que não precisa continuar presa nele. Eu consegui, e você também pode conseguir.</p>
-        <p class="bio-crn">CRN/9 29522</p>
-      </div>
-
-      <img class="foto-real" loading="lazy" decoding="async" width="750" height="750" src="assets/etapas/etapa25-bio/destaque.webp" alt="Foto da nutricionista grávida, com a família" style="margin-bottom:14px;">
-      <p class="bio-reforco">Eu vivi essa transformação e agora é a sua vez!</p>
-      <button type="button" class="btn btn-primario btn-grande" id="btn-continuar-bio">Gerar meu cardápio →</button>
-    </section>
-
     <!-- ===================== ETAPA 23 - LOADING ===================== -->
     <section class="etapa" id="etapa-23" data-etapa="23">
       <div class="loading-wrap">
@@ -2022,16 +1895,15 @@ if (document.readyState === "complete") {
         <div class="loading-checklist" id="loading-checklist">
           <div class="loading-item" data-item="1"><span class="loading-item-check">✓</span><span>Analisando suas respostas...</span></div>
           <div class="loading-item" data-item="2"><span class="loading-item-check">✓</span><span>Calculando seu IMC e perfil...</span></div>
-          <div class="loading-item" data-item="3"><span class="loading-item-check">✓</span><span id="loading-texto-sono">Identificando alimentos ideais para você...</span></div>
-          <div class="loading-item" data-item="4"><span class="loading-item-check">✓</span><span id="loading-texto-momento">Identificando alimentos ideais para você...</span></div>
-          <div class="loading-item" data-item="5"><span class="loading-item-check">✓</span><span id="loading-texto-preparo">Identificando alimentos ideais para você...</span></div>
-          <div class="loading-item" data-item="6"><span class="loading-item-check">✓</span><span>Montando seu cardápio exclusivo...</span></div>
+          <div class="loading-item" data-item="3"><span class="loading-item-check">✓</span><span>Identificando alimentos ideais para você...</span></div>
+          <div class="loading-item" data-item="4"><span class="loading-item-check">✓</span><span>Montando seu cardápio exclusivo...</span></div>
         </div>
 
         <div class="loading-social" id="loading-social">
           <div class="caso-social">
             <img class="foto-real" loading="lazy" decoding="async" width="800" height="1149" src="assets/etapas/etapa23-loading/antes-depois.webp" alt="Foto antes e depois real, resultado verificado">
             <span class="caso-tag-resultado">Resultado Verificado</span>
+            <p class="caso-depoimento oculto">"[Depoimento curto real entra aqui.]"</p>
           </div>
         </div>
       </div>
@@ -2039,18 +1911,6 @@ if (document.readyState === "complete") {
 
     <!-- ===================== ETAPA 24 - PERFIL NUTRICIONAL E PREVISÃO ===================== -->
     <section class="etapa" id="etapa-24" data-etapa="24">
-      <div class="faixa-resultado">
-        <p class="faixa-resultado-eyebrow">🎯 Com base no seu diagnóstico...</p>
-        <h2 class="faixa-resultado-titulo">Prevemos que você pesará <span class="valor-inv" data-bind="peso-desejado-24">60</span> kg até <span class="valor-inv" data-bind="data-final-24">--</span>!</h2>
-        <p class="faixa-resultado-sub">🎊 Boa notícia! Sua meta é alcançável</p>
-      </div>
-
-      <div class="grafico-box">
-        <canvas id="grafico-24" width="400" height="220" role="img" aria-label="Gráfico de projeção de peso ao longo do tempo"></canvas>
-      </div>
-
-      <div class="tabela-projecao" id="tabela-projecao-24"></div>
-
       <div class="faixa-resultado">
         <p class="faixa-resultado-eyebrow">Com base no seu perfil...</p>
         <p class="faixa-secar-linha">você pode secar entre</p>
@@ -2104,12 +1964,12 @@ if (document.readyState === "complete") {
       <div class="taxa-box">
         <p class="card-label">🔥 Sua Taxa de Queima de Gordura</p>
         <div class="barra-gradiente taxa">
-          <div class="marcador-barra" id="taxa-marcador" style="left:15%;"></div>
+          <div class="marcador-barra" style="left:15%;"></div>
         </div>
         <div class="imc-legenda">
           <span>Lenta</span><span>Média</span><span>Rápida</span>
         </div>
-        <p class="taxa-resultado-texto" id="taxa-resultado-texto">Lenta, mas o Plano Alimentar vai corrigir isso 🔥</p>
+        <p class="taxa-resultado-texto">Lenta mas o Plano Alimentar vai corrigir isso 🔥</p>
 
         <div class="comparacao-box">
           <div class="comparacao-col sem">
@@ -2129,8 +1989,13 @@ if (document.readyState === "complete") {
         </div>
       </div>
 
-      <div class="bloco-borda-destaque">
-        🎊 <span id="texto-projecao-24">Seguindo o Plano Alimentar Para Lactantes, você pode chegar com o corpo que deseja sem parar de amamentar e sem dietas restritivas!</span>
+      <div class="perfil-box">
+        <p class="card-label">📅 Previsão personalizada para <span data-bind="nome-etapa24">você</span></p>
+        <p class="etapa-subtitulo" style="margin-bottom:10px;">Com base em perfis semelhantes ao seu:</p>
+        <p class="texto-projecao" id="texto-previsao-24" style="margin-bottom:14px; text-align:left;">--</p>
+        <div class="grafico-box" style="margin-bottom:0;">
+          <canvas id="grafico-24" width="400" height="180" role="img" aria-label="Gráfico simplificado de previsão de peso"></canvas>
+        </div>
       </div>
 
       <button type="button" class="btn btn-primario btn-grande" id="btn-continuar-24" style="margin-top:6px;">Ver meu Cardápio Personalizado →</button>
@@ -2141,13 +2006,6 @@ if (document.readyState === "complete") {
 
       <h2 class="etapa-titulo" style="text-align:center;"><span data-bind="nome-etapa25">Mamãe</span>, seu Plano Alimentar Para Lactantes está pronto!</h2>
       <p class="etapa-subtitulo" style="text-align:center;">Escolha o acesso que faz mais sentido para você:</p>
-
-      <!-- recap das respostas -->
-      <div class="perfil-box" id="recap-respostas">
-        <p class="card-label">📋 O que você nos contou, <span data-bind="nome-etapa25">você</span></p>
-        <div id="recap-linhas"></div>
-        <p class="etapa-subtitulo" style="margin:10px 0 0;">O seu Plano Alimentar Para Lactantes foi montado para esse perfil. 👇</p>
-      </div>
 
       <!-- 25a: aviso condicional APLV -->
       <div class="aplv-box oculto" id="aplv-aviso-25">
@@ -2161,11 +2019,16 @@ if (document.readyState === "complete") {
         <h2 class="oferta-titulo">Super Oferta + Bônus</h2>
         <p class="oferta-sub">O caminho mais rápido para emagrecer sem parar de amamentar</p>
 
-        <ul class="oferta-lista" id="oferta-lista-super">
-          <li id="item-cardapio-li"><span class="oferta-item-nome" id="item-cardapio-nome">✓ Plano Alimentar Para Lactantes</span></li>
+        <ul class="oferta-lista">
+          <li><span class="oferta-item-nome" id="item-cardapio-nome">✓ Plano Alimentar Para Lactantes</span></li>
+          <li><span class="oferta-item-nome">✓ Guia de Saladas Saciantes em 10 Minutos</span><span class="oferta-item-valor">R$97</span></li>
+          <li><span class="oferta-item-nome">✓ Guia Perdendo Medidas em 20 Passos Sem Dieta Radical</span><span class="oferta-item-valor">R$197</span></li>
+          <li><span class="oferta-item-nome">✓ Consultoria Construindo Metas Que Cabem na Sua Rotina</span><span class="oferta-item-valor">R$247</span></li>
+          <li><span class="oferta-item-nome">✓ Consultoria Silenciando a Fome Emocional</span><span class="oferta-item-valor">R$237</span></li>
+          <li><span class="oferta-item-nome">✓ Consultoria Quebrando o Ciclo da Autossabotagem</span><span class="oferta-item-valor">R$297</span></li>
         </ul>
 
-        <p class="oferta-total-riscado">De R$925</p>
+        <p class="oferta-total-riscado">De R$1.075</p>
         <p class="oferta-preco">R$19,90</p>
         <p class="oferta-preco-condicoes">🔒 Pagamento único · Acesso vitalício · Atualizações inclusas</p>
 
@@ -2178,17 +2041,11 @@ if (document.readyState === "complete") {
         <span class="oferta-tag neutra">Plano básico sem bônus</span>
         <ul class="oferta-lista">
           <li><span class="oferta-item-nome">Plano Alimentar Para Lactantes ✅</span></li>
-          <li><span class="oferta-item-nome">Acesso por 1 ano ⚠️</span></li>
+          <li><span class="oferta-item-nome">Acesso por 7 dias ⚠️</span></li>
           <li><span class="oferta-item-nome">Sem suporte, sem bônus, sem acompanhamento ❌</span></li>
         </ul>
         <p class="oferta-preco">R$10,90</p>
         <button type="button" class="btn btn-secundario" id="btn-abrir-basico">Começar só com o básico (resultados mais lentos)</button>
-      </div>
-
-      <!-- mini bio -->
-      <div class="mini-bio-card">
-        <img class="mini-bio-foto" loading="lazy" decoding="async" width="1080" height="1080" src="assets/etapas/etapa25-bio/perfil.webp" alt="Foto de Ákila Samara">
-        <p><strong>Ákila Samara</strong>, nutricionista (CRN/9 29522). Passei 8 meses com 8 kg acima do peso depois da gestação, presa num ciclo de compulsão. Reorganizei minha rotina e minha alimentação e eliminei 10 kg em 3 meses. Montei este plano para você passar por isso com menos dor.</p>
       </div>
 
       <!-- 25d: Garantia -->
@@ -2207,12 +2064,21 @@ if (document.readyState === "complete") {
 
       <div class="caso-social">
         <img class="foto-real" loading="lazy" decoding="async" width="800" height="1005" src="assets/etapas/etapa25-prova-social-2/caso-01.webp" alt="Foto antes e depois real, oferta final, caso 1">
+        <span class="caso-tag-resultado oculto">[Resultado real: -X kg em Y semanas]</span>
+        <p class="caso-depoimento oculto">"[Depoimento real da paciente entra aqui.]"</p>
+        <p class="caso-autor oculto">[Nome], [idade] anos, [Cidade]</p>
       </div>
       <div class="caso-social">
         <img class="foto-real" loading="lazy" decoding="async" width="800" height="1005" src="assets/etapas/etapa25-prova-social-2/caso-02.webp" alt="Foto antes e depois real, oferta final, caso 2">
+        <span class="caso-tag-resultado oculto">[Resultado real: -X kg em Y semanas]</span>
+        <p class="caso-depoimento oculto">"[Depoimento real da paciente entra aqui.]"</p>
+        <p class="caso-autor oculto">[Nome], [idade] anos, [Cidade]</p>
       </div>
       <div class="caso-social">
         <img class="foto-real" loading="lazy" decoding="async" width="800" height="1685" src="assets/etapas/etapa25-prova-social-2/caso-03.webp" alt="Foto antes e depois real, oferta final, caso 3">
+        <span class="caso-tag-resultado oculto">[Resultado real: -X kg em Y semanas]</span>
+        <p class="caso-depoimento oculto">"[Depoimento real da paciente entra aqui.]"</p>
+        <p class="caso-autor oculto">[Nome], [idade] anos, [Cidade]</p>
       </div>
 
       <!-- 25f: Resumindo -->
@@ -2229,6 +2095,22 @@ if (document.readyState === "complete") {
         <p>Acho justo você ver por dentro e se não gostar, devolvo o seu investimento. Tudo que você precisa fazer agora é clicar no botão abaixo para ter acesso a TUDO que você viu.</p>
         <button type="button" class="btn btn-primario btn-grande" id="btn-checkout-resumo">Quero garantir meu acesso agora →</button>
       </div>
+
+      <!-- 25g: bio da nutricionista -->
+      <div class="bio-card">
+        <span class="tag-pill">👋 Quem sou eu?</span>
+        <img class="bio-foto-perfil" loading="lazy" decoding="async" width="1080" height="1080" src="assets/etapas/etapa25-bio/perfil.webp" alt="Foto de Ákila Samara">
+        <p class="bio-nome">Ákila Samara</p>
+        <p>Sou nutricionista desde 2016 e, durante quase toda a minha vida adulta, sempre tive um biotipo magro. Achava que comer sem me preocupar seria minha realidade para sempre. Então a maternidade mudou tudo.</p>
+        <p>Engravidei com 69 kg e cheguei ao fim da gestação com 83 kg. Depois do parto vieram as noites mal dormidas, a ansiedade e o cansaço, e eu buscava conforto na comida. Sem perceber, entrei num ciclo de compulsão alimentar que me manteve cerca de 8 kg acima do meu peso por oito meses.</p>
+        <p>O mais difícil não era o número da balança, era não me reconhecer no espelho. Até que decidi mudar, não só o corpo, mas a forma como eu lidava com minhas emoções. Reorganizei minha rotina e minha alimentação, e eliminei 10 kg em apenas 3 meses.</p>
+        <p>Hoje, quando acompanho outras mães, entendo exatamente o que elas sentem, porque eu vivi isso. Se você está nesse ciclo agora, saiba que não precisa continuar presa nele. Eu consegui, e você também pode conseguir.</p>
+        <p class="bio-crn">CRN/9 29522</p>
+      </div>
+
+      <img class="foto-real" loading="lazy" decoding="async" width="750" height="750" src="assets/etapas/etapa25-bio/destaque.webp" alt="Foto da nutricionista grávida, com a família" style="margin-bottom:14px;">
+      <p class="bio-reforco">Eu vivi essa transformação e agora é a sua vez! Aproveite agora, você não vai encontrar essa oferta depois.</p>
+      <button type="button" class="btn btn-primario btn-grande" id="btn-checkout-bio">✅ Quero garantir meu acesso agora →</button>
 
       <div class="footer-espaco"></div>
     </section>
@@ -2248,8 +2130,8 @@ if (document.readyState === "complete") {
 <div class="modal-overlay oculto" id="modal-retencao">
   <div class="modal-caixa">
     <h2 class="modal-titulo">Pegue o seu desconto!</h2>
-    <p class="modal-texto">Receba agora um desconto especial na Super Oferta para levar as aulas, acesso vitalício, os bônus exclusivos e muito mais... Seja rápida e aproveite agora!</p>
-    <p class="modal-preco-de">De R$925 aproveite agora por apenas...</p>
+    <p class="modal-texto">Receba agora um desconto especial na Super Oferta para participar das mentorias, acesso vitalício, os bônus exclusivos e muito mais... Seja rápida e aproveite agora!</p>
+    <p class="modal-preco-de">De R$1.075 aproveite agora por apenas...</p>
     <p class="modal-preco-por">R$19,90</p>
     <button type="button" class="btn btn-primario btn-grande" id="btn-modal-super">Quero o mais completo com desconto agora!</button>
     <button type="button" class="btn btn-texto" id="btn-modal-basico">Quero apenas o básico sem desconto e sem presentes</button>

@@ -17,15 +17,7 @@ const CHECKOUT_URL_SUPER = "https://plano.akilasamara.com.br/?preco=1990";
 const CHECKOUT_URL_BASICO = "https://plano.akilasamara.com.br/?preco=1090";
 
 /* ---------------------------------------------------------------------
-   Ritmo máximo de emagrecimento (kg/semana) usado para colocar um teto
-   realista na projeção (Etapa 20 em diante). Valor sugerido pela
-   nutricionista (4 kg/mês); pendente de confirmação final dela, ver
-   copy-alterações.md seção 11. Fácil de ajustar, é só mudar aqui.
-   --------------------------------------------------------------------- */
-const RITMO_MAX_KG_SEMANA = 1;
-
-/* ---------------------------------------------------------------------
-   Lista de notificações de compra fake (Etapa 24 em diante).
+   Lista de notificações de compra fake (Etapa 21 em diante).
    Decisão de negócio já confirmada com a cliente: nomes e cidades
    fictícios, não reaproveitados de nenhum quiz de referência.
    55 combinações de nome + cidade + estado para dar variedade real
@@ -101,21 +93,11 @@ const state = {
   corpoTexto: null,
   partesCorpo: [],
   tempoAmamentando: null,
-  tempoAmamentandoLabel: null,
-  jaTentou: [],
+  pesoAcima: null,
   nome: "",
   posParto: null,
-  espelho: null,
-  espelhoLabel: null,
-  alimentacaoPosBebe: [],
   travouResultados: null,
-  travouResultadosLabel: null,
-  momentoComida: null,
-  momentoComidaLabel: null,
-  sono: null,
-  sonoLabel: null,
   tempoPreparo: null,
-  tempoPreparoLabel: null,
   aplv: null,
   pesoAtual: 70,
   altura: 165,
@@ -126,21 +108,9 @@ const state = {
   projecao: null,
 };
 
-/* ---------------------------------------------------------------------
-   Ordem lógica das 29 telas do quiz (fonte única de verdade pra barra
-   de progresso e pro botão Voltar). As etapas 7 e 21 da versão antiga
-   foram removidas; N1-N5 são as novas. Os números das etapas mantidas
-   não mudaram, só a sequência entre elas.
-   --------------------------------------------------------------------- */
-const ETAPAS_ORDEM = [
-  "0", "1", "2", "3", "4", "5", "6",
-  "n1", "8", "9", "10",
-  "n2", "n3", "11",
-  "n4", "n5", "12", "13", "14", "15", "16", "17", "18", "19", "20",
-  "22", "bio", "23", "24", "25",
-];
-const ETAPAS_SEM_BOTAO_VOLTAR = new Set(["0", "22", "bio", "23", "24", "25"]);
-let etapaAtual = "0";
+const ULTIMA_ETAPA = 25;
+const ETAPAS_SEM_BOTAO_VOLTAR = new Set([0, 21, 22, 23, 24, 25]);
+let etapaAtual = 0;
 
 /* ---------------------------------------------------------------------
    Utilidades
@@ -170,12 +140,11 @@ function formatarDataCurta(data) {
    Navegação entre etapas
    --------------------------------------------------------------------- */
 function irPara(indice) {
-  indice = String(indice);
   const atualEl = document.querySelector(`.etapa[data-etapa="${etapaAtual}"]`);
   const novaEl = document.querySelector(`.etapa[data-etapa="${indice}"]`);
   if (!novaEl) return;
 
-  if (etapaAtual === "0" && indice !== "0") pararContadorSocial();
+  if (etapaAtual === 0 && indice !== 0) pararContadorSocial();
 
   if (atualEl) atualEl.classList.remove("etapa-ativa");
   novaEl.classList.add("etapa-ativa");
@@ -189,13 +158,12 @@ function irPara(indice) {
 
 function atualizarProgresso(indice) {
   const wrap = document.getElementById("barra-progresso-wrap");
-  if (indice === "0") {
+  if (indice === 0) {
     wrap.classList.add("oculto");
     return;
   }
   wrap.classList.remove("oculto");
-  const posicao = ETAPAS_ORDEM.indexOf(indice);
-  const pct = Math.round((posicao / (ETAPAS_ORDEM.length - 1)) * 100);
+  const pct = Math.round((indice / ULTIMA_ETAPA) * 100);
   document.getElementById("barra-progresso-fill").style.width = pct + "%";
 }
 
@@ -217,17 +185,6 @@ function atualizarBotaoVoltar(indice) {
    - data-proxima="<índice da próxima etapa>" (single, avanço automático)
    - data-manual="true" (single, não avança sozinho; um botão externo avança)
    --------------------------------------------------------------------- */
-/* Campos de seleção que, igual à Etapa 20, revelam um bloco de destaque
-   com uma "reação" + botão Continuar em vez de avançar sozinhos. */
-const CAMPOS_COM_REACAO = {
-  prazoObjetivo: { boxId: "box-etapa-20", btnId: "btn-continuar-20" },
-  jaTentou: { boxId: "box-etapa-n1", btnId: "btn-continuar-n1" },
-  espelho: { boxId: "box-etapa-n2", btnId: "btn-continuar-n2" },
-  alimentacaoPosBebe: { boxId: "box-etapa-n3", btnId: "btn-continuar-n3" },
-  momentoComida: { boxId: "box-etapa-n4", btnId: "btn-continuar-n4" },
-  sono: { boxId: "box-etapa-n5", btnId: "btn-continuar-n5" },
-};
-
 function configurarOpcoes() {
   document.querySelectorAll(".lista-opcoes[data-tipo], .grade-opcoes[data-tipo]").forEach((container) => {
     container.addEventListener("click", (evento) => {
@@ -238,7 +195,6 @@ function configurarOpcoes() {
       const campo = container.dataset.campo;
       const labelEl = opcao.querySelector(".opcao-label, .opcao-cartao-label");
       const label = labelEl ? labelEl.textContent.trim() : opcao.textContent.trim();
-      const config = CAMPOS_COM_REACAO[campo];
 
       if (tipo === "single") {
         container.querySelectorAll("[data-valor]").forEach((o) => o.classList.remove("selecionada"));
@@ -246,130 +202,42 @@ function configurarOpcoes() {
         state[campo] = opcao.dataset.valor;
         state[campo + "Label"] = label;
 
-        if (config) {
-          document.getElementById(config.boxId).classList.remove("oculto");
-          document.getElementById(config.btnId).classList.remove("oculto");
-          atualizarReacaoCampo(campo);
+        if (campo === "prazoObjetivo") {
+          document.getElementById("box-etapa-20").classList.remove("oculto");
+          document.getElementById("btn-continuar-20").classList.remove("oculto");
         }
 
         if (container.dataset.manual !== "true") {
-          const proxima = container.dataset.proxima;
+          const proxima = parseInt(container.dataset.proxima, 10);
           setTimeout(() => irPara(proxima), 320);
         }
       } else if (tipo === "multi") {
-        if (opcao.dataset.exclusiva === "true") {
-          const vaiSelecionar = !opcao.classList.contains("selecionada");
-          container.querySelectorAll("[data-valor]").forEach((o) => o.classList.remove("selecionada"));
-          if (vaiSelecionar) opcao.classList.add("selecionada");
-        } else {
-          opcao.classList.toggle("selecionada");
-          const exclusiva = container.querySelector('[data-exclusiva="true"]');
-          if (exclusiva) exclusiva.classList.remove("selecionada");
-        }
-
+        opcao.classList.toggle("selecionada");
         const selecionados = Array.from(container.querySelectorAll(".selecionada")).map((o) => o.dataset.valor);
         state[campo] = selecionados;
-
-        if (config) {
-          const temSelecao = selecionados.length > 0;
-          document.getElementById(config.boxId).classList.toggle("oculto", !temSelecao);
-          document.getElementById(config.btnId).classList.toggle("oculto", !temSelecao);
-          if (temSelecao) atualizarReacaoCampo(campo);
-        } else {
-          const etapaEl = container.closest(".etapa");
-          const btnContinuar = document.getElementById("btn-continuar-" + etapaEl.dataset.etapa);
-          if (btnContinuar) btnContinuar.disabled = selecionados.length === 0;
-        }
+        const btnContinuar = document.getElementById("btn-continuar-5");
+        if (btnContinuar) btnContinuar.disabled = selecionados.length === 0;
       }
     });
   });
 }
 
 /* ---------------------------------------------------------------------
-   Textos de "reação" das etapas com o padrão da Etapa 20 (seleciona →
-   aparece bloco de destaque → aparece botão Continuar).
-   --------------------------------------------------------------------- */
-const PRAZO_EM_SEMANAS = {
-  "4-semanas": 4,
-  "2-meses": 8,
-  "3-meses": 12,
-  "4-meses": 16,
-};
-
-function semanasMinimasSeguras(diffKg) {
-  return Math.ceil(diffKg / RITMO_MAX_KG_SEMANA);
-}
-
-function atualizarReacaoPrazo() {
-  const box = document.getElementById("box-etapa-20");
-  const diffKg = Math.max(0, state.pesoAtual - state.pesoDesejado);
-  const semanasEscolhidas = PRAZO_EM_SEMANAS[state.prazoObjetivo] || 8;
-  const semanasMinimas = semanasMinimasSeguras(diffKg);
-
-  if (diffKg > 0 && semanasEscolhidas < semanasMinimas) {
-    box.innerHTML = `💡 Para perder <strong>${diffKg} kg</strong> com segurança enquanto você amamenta, o prazo realista é de cerca de <strong>${semanasMinimas} semanas</strong>. Ajustamos a sua projeção para você chegar lá com saúde.`;
-  } else {
-    box.textContent = "💡 Com o Plano Alimentar Para Lactantes, mães lactantes emagrecem no ritmo seguro, de forma saudável e mantendo o leite.";
-  }
-}
-
-function atualizarReacaoJaTentou() {
-  document.getElementById("box-etapa-n1").textContent = state.jaTentou.includes("nenhuma")
-    ? "💡 Então você está no lugar certo para começar do jeito certo, sem passar pelo que cansa tantas mães."
-    : "💡 Planos feitos para quem não amamenta cobram energia e leite. Vamos entender por quê.";
-}
-
-function atualizarReacaoEspelho() {
-  document.getElementById("box-etapa-n2").textContent =
-    "💡 Isso é mais comum do que parece, e dá para mudar sem punir seu corpo.";
-}
-
-function atualizarReacaoAlimentacao() {
-  document.getElementById("box-etapa-n3").textContent =
-    "💡 A rotina de quem cuida de um bebê quase não deixa espaço para comer direito. É aí que o peso trava.";
-}
-
-function atualizarReacaoMomento() {
-  document.getElementById("box-etapa-n4").textContent =
-    "💡 Anotado. Seu plano vai ter uma estratégia para esse momento.";
-}
-
-function atualizarReacaoSono() {
-  document.getElementById("box-etapa-n5").textContent = state.sono === "6h-mais"
-    ? "💡 Ótimo, o sono é um grande aliado. Vamos aproveitar isso no seu plano."
-    : "💡 Dormir pouco aumenta a fome e a vontade de doce. Não é falta de força de vontade.";
-}
-
-function atualizarReacaoCampo(campo) {
-  if (campo === "prazoObjetivo") atualizarReacaoPrazo();
-  else if (campo === "jaTentou") atualizarReacaoJaTentou();
-  else if (campo === "espelho") atualizarReacaoEspelho();
-  else if (campo === "alimentacaoPosBebe") atualizarReacaoAlimentacao();
-  else if (campo === "momentoComida") atualizarReacaoMomento();
-  else if (campo === "sono") atualizarReacaoSono();
-}
-
-/* ---------------------------------------------------------------------
    Botões simples de avançar (sem lógica extra)
    --------------------------------------------------------------------- */
 const BOTOES_AVANCAR = {
-  "btn-iniciar-quiz": "1",
-  "btn-continuar-5": "6",
-  "btn-continuar-n1": "8",
-  "btn-continuar-8": "9",
-  "btn-continuar-n2": "n3",
-  "btn-continuar-n3": "11",
-  "btn-continuar-n4": "n5",
-  "btn-continuar-n5": "12",
-  "btn-continuar-12": "13",
-  "btn-continuar-13": "14",
-  "btn-continuar-16": "17",
-  "btn-continuar-17": "18",
-  "btn-continuar-18": "19",
-  "btn-continuar-20": "22",
-  "btn-continuar-22": "bio",
-  "btn-continuar-bio": "23",
-  "btn-continuar-24": "25",
+  "btn-iniciar-quiz": 1,
+  "btn-continuar-5": 6,
+  "btn-continuar-8": 9,
+  "btn-continuar-12": 13,
+  "btn-continuar-13": 14,
+  "btn-continuar-16": 17,
+  "btn-continuar-17": 18,
+  "btn-continuar-18": 19,
+  "btn-continuar-20": 21,
+  "btn-continuar-21": 22,
+  "btn-continuar-22": 23,
+  "btn-continuar-24": 25,
 };
 
 function configurarBotoesAvancar() {
@@ -379,9 +247,9 @@ function configurarBotoesAvancar() {
   });
 
   document.getElementById("btn-voltar").addEventListener("click", () => {
-    if (ETAPAS_SEM_BOTAO_VOLTAR.has(etapaAtual)) return;
-    const posicaoAtual = ETAPAS_ORDEM.indexOf(etapaAtual);
-    if (posicaoAtual > 0) irPara(ETAPAS_ORDEM[posicaoAtual - 1]);
+    if (etapaAtual > 0 && !ETAPAS_SEM_BOTAO_VOLTAR.has(etapaAtual)) {
+      irPara(etapaAtual - 1);
+    }
   });
 }
 
@@ -509,17 +377,21 @@ function posicaoMarcadorIMC(imc) {
 /* ---------------------------------------------------------------------
    Cálculos: projeção de peso
 
-   Respeita o prazo escolhido pela usuária na Etapa 20 (4 semanas / 2
-   meses / 3 meses / 4 meses), exceto quando esse prazo implicaria um
-   ritmo acima de RITMO_MAX_KG_SEMANA: nesse caso o prazo é esticado até
-   o mínimo seguro (semanasMinimasSeguras), e a Etapa 20 avisa a usuária
-   disso antes de continuar (ver atualizarReacaoPrazo).
+   O resultado sempre respeita exatamente o prazo escolhido pela usuária
+   na Etapa 20 (4 semanas / 2 meses / 3 meses / 4 meses), sem estender a
+   data mesmo quando a diferença de peso implica um ritmo mais agressivo.
    --------------------------------------------------------------------- */
+const PRAZO_EM_DIAS = {
+  "4-semanas": 28,
+  "2-meses": 60,
+  "3-meses": 90,
+  "4-meses": 120,
+};
+
 function calcularProjecao(pesoAtual, pesoDesejado, prazoKey) {
   const diffKg = Math.max(0, pesoAtual - pesoDesejado);
-  const semanasEscolhidas = PRAZO_EM_SEMANAS[prazoKey] || 8;
-  const semanasMinimas = diffKg > 0 ? semanasMinimasSeguras(diffKg) : 0;
-  const semanasFinal = Math.max(semanasEscolhidas, semanasMinimas);
+  const diasEscolhidos = PRAZO_EM_DIAS[prazoKey] || 60;
+  const semanasFinal = Math.round((diasEscolhidos / 7) * 10) / 10;
 
   const hoje = new Date();
   const dataFinal = new Date(hoje.getTime() + semanasFinal * 7 * 24 * 60 * 60 * 1000);
@@ -707,32 +579,6 @@ function versaoCardapioTexto() {
 }
 
 /* ---------------------------------------------------------------------
-   Taxa de queima de gordura variável (Etapa 24): nível base pela
-   resposta da Etapa 4 (corpoTexto), ajustado um nível pra cima ou pra
-   baixo conforme o sono (N5).
-   --------------------------------------------------------------------- */
-const NIVEL_BASE_POR_CORPO = {
-  "controlo-mas-nao-cai": "lenta",
-  "metabolismo-travado": "lenta",
-  "gordura-acumulada": "media",
-  "inchaco": "media",
-};
-const ORDEM_NIVEIS_TAXA = ["lenta", "media", "rapida"];
-const TEXTO_TAXA_QUEIMA = {
-  lenta: "Lenta, mas o Plano Alimentar vai corrigir isso 🔥",
-  media: "Média, e o Plano Alimentar vai acelerar isso 🔥",
-  rapida: "Rápida, e o Plano Alimentar vai manter esse ritmo 🔥",
-};
-const POSICAO_MARCADOR_TAXA = { lenta: 15, media: 50, rapida: 85 };
-
-function calcularNivelTaxaQueima() {
-  let indiceNivel = ORDEM_NIVEIS_TAXA.indexOf(NIVEL_BASE_POR_CORPO[state.corpoTexto] || "lenta");
-  if (state.sono === "menos-4h") indiceNivel = Math.max(0, indiceNivel - 1);
-  else if (state.sono === "6h-mais") indiceNivel = Math.min(ORDEM_NIVEIS_TAXA.length - 1, indiceNivel + 1);
-  return ORDEM_NIVEIS_TAXA[indiceNivel];
-}
-
-/* ---------------------------------------------------------------------
    Tabela de marcos semanais da projeção (Etapa 21), a partir dos
    mesmos pontos usados no gráfico (já respeitam o ritmo seguro).
    --------------------------------------------------------------------- */
@@ -761,92 +607,8 @@ function renderizarTabelaProjecao(containerId, pontos) {
   }).join("");
 }
 
-/* ---------------------------------------------------------------------
-   Recap das respostas (Etapa 25): mostra só as linhas que têm resposta.
-   --------------------------------------------------------------------- */
-const TEMPO_AMAMENTANDO_RECAP = {
-  "menos-1-mes": "menos de 1 mês",
-  "1-3-meses": "1 a 3 meses",
-  "3-6-meses": "3 a 6 meses",
-  "mais-6-meses": "mais de 6 meses",
-};
-
-function renderizarRecap() {
-  const linhas = [];
-
-  if (state.tempoAmamentando) {
-    linhas.push({ icone: "🤱", valor: `Amamentando há ${TEMPO_AMAMENTANDO_RECAP[state.tempoAmamentando]}` });
-  }
-  const diffKg = state.projecao ? state.projecao.diffKg : Math.max(0, state.pesoAtual - state.pesoDesejado);
-  if (diffKg > 0) {
-    linhas.push({ icone: "🎯", valor: `${diffKg.toFixed(0)} kg para chegar aos seus ${state.pesoDesejado} kg` });
-  }
-  if (state.travouResultadosLabel) {
-    linhas.push({ icone: "🚧", valor: `Maior trava: ${state.travouResultadosLabel}` });
-  }
-  if (state.momentoComidaLabel) {
-    linhas.push({ icone: "🕐", valor: `Momento mais difícil: ${state.momentoComidaLabel}` });
-  }
-  if (state.tempoPreparoLabel) {
-    linhas.push({ icone: "⏱️", valor: `Tempo na cozinha: ${state.tempoPreparoLabel}` });
-  }
-  if (state.aplv === "sim" || state.aplv === "suspeita") {
-    linhas.push({ icone: "🍼", valor: "Seu bebê tem APLV: versão adaptada incluída" });
-  }
-
-  document.getElementById("recap-linhas").innerHTML = linhas.slice(0, 6).map((l) => `
-    <div class="perfil-linha">
-      <span class="perfil-icone">${l.icone}</span>
-      <span class="perfil-texto"><span class="perfil-valor">${l.valor}</span></span>
-    </div>
-  `).join("");
-}
-
-/* ---------------------------------------------------------------------
-   Ordem dinâmica dos bônus (Etapa 25b): o bônus mais relevante pra
-   resposta da usuária sobe pro topo da lista (depois do item fixo do
-   Plano Alimentar). Regra da Etapa 11 tem prioridade sobre a da 14.
-   --------------------------------------------------------------------- */
-const BONUS_PADRAO = [
-  { chave: "saladas", nome: "Guia de Saladas Saciantes em 10 Minutos", preco: "R$97" },
-  { chave: "medidas", nome: "Guia Perdendo Medidas em 20 Passos Sem Dieta Radical", preco: "R$197" },
-  { chave: "marmitas", nome: "Lista de Compras + Marmitas de 15 Minutos", preco: "R$97" },
-  { chave: "fome-emocional", nome: "Aula Silenciando a Fome Emocional", preco: "R$237" },
-  { chave: "autossabotagem", nome: "Aula Quebrando o Ciclo da Autossabotagem", preco: "R$297" },
-];
-
-const BONUS_PRIORITARIO_POR_TRAVA = {
-  "fome-compulsao-doces": "fome-emocional",
-  "sem-tempo-cozinhar": "marmitas",
-  "nao-sei-o-que-comer": "marmitas",
-  "peso-nao-cai": "medidas",
-};
-const BONUS_PRIORITARIO_POR_PREPARO = {
-  "menos-15min": "marmitas",
-};
-
-function calcularOrdemBonus() {
-  const chavePrioritaria = BONUS_PRIORITARIO_POR_TRAVA[state.travouResultados]
-    || BONUS_PRIORITARIO_POR_PREPARO[state.tempoPreparo]
-    || null;
-  if (!chavePrioritaria) return BONUS_PADRAO.slice();
-
-  const prioritario = BONUS_PADRAO.find((b) => b.chave === chavePrioritaria);
-  const resto = BONUS_PADRAO.filter((b) => b.chave !== chavePrioritaria);
-  return [prioritario, ...resto];
-}
-
-function renderizarBonusOferta() {
-  const ul = document.getElementById("oferta-lista-super");
-  ul.querySelectorAll("li:not(#item-cardapio-li)").forEach((li) => li.remove());
-  calcularOrdemBonus().forEach((bonus) => {
-    ul.insertAdjacentHTML("beforeend",
-      `<li><span class="oferta-item-nome">✓ ${bonus.nome}</span><span class="oferta-item-valor">${bonus.preco}</span></li>`);
-  });
-}
-
 function aoEntrarEtapa(indice) {
-  if (indice === "18") {
+  if (indice === 18) {
     const inputPesoDesejado = document.getElementById("slider-peso-desejado");
     const minSlider = 40;
     const maxPermitido = Math.max(minSlider, state.pesoAtual - 1);
@@ -858,26 +620,39 @@ function aoEntrarEtapa(indice) {
     atualizarTextoMeta();
   }
 
-  if (indice === "23") {
-    iniciarLoading();
-  }
-
-  if (indice === "24") {
+  if (indice === 21) {
     const proj = calcularProjecao(state.pesoAtual, state.pesoDesejado, state.prazoObjetivo);
     state.projecao = proj;
 
-    document.querySelector('[data-bind="peso-desejado-24"]').textContent = state.pesoDesejado;
-    document.querySelector('[data-bind="data-final-24"]').textContent = formatarData(proj.dataFinal);
+    document.querySelector('[data-bind="peso-desejado-21"]').textContent = state.pesoDesejado;
+    document.querySelector('[data-bind="data-final-21"]').textContent = formatarData(proj.dataFinal);
+
+    const temOcasiao = state.ocasiaoEspecial && state.ocasiaoEspecial !== "nenhuma";
+    const trechoOcasiao = temOcasiao ? ` em ${state.ocasiaoEspecialLabel}` : "";
+    document.getElementById("texto-projecao-21").textContent =
+      `Seguindo o Plano Alimentar Para Lactantes, ${state.nome || "você"} pode chegar${trechoOcasiao} com o corpo que deseja sem parar de amamentar e sem dietas restritivas!`;
 
     requestAnimationFrame(() => {
-      desenharGraficoPeso(document.getElementById("grafico-24"), proj.pontos, 200, true);
+      desenharGraficoPeso(document.getElementById("grafico-21"), proj.pontos, 200, true);
     });
-    renderizarTabelaProjecao("tabela-projecao-24", proj.pontos);
 
+    renderizarTabelaProjecao("tabela-projecao-21", proj.pontos);
+
+    iniciarNotificacoesFake();
+  }
+
+  if (indice === 23) {
+    iniciarLoading();
+  }
+
+  if (indice === 24) {
     const imc = calcularIMC(state.pesoAtual, state.altura);
     document.getElementById("imc-valor").textContent = imc.toFixed(1);
     document.getElementById("imc-categoria-texto").textContent = categoriaIMC(imc);
     document.getElementById("imc-marcador").style.left = posicaoMarcadorIMC(imc) + "%";
+
+    const proj = state.projecao || calcularProjecao(state.pesoAtual, state.pesoDesejado, state.prazoObjetivo);
+    state.projecao = proj;
 
     document.getElementById("secar-faixa-valor").textContent = calcularFaixaSecar(proj.diffKg);
 
@@ -886,72 +661,38 @@ function aoEntrarEtapa(indice) {
     document.getElementById("perfil-metabolico").textContent = perfilMetabolicoTexto();
     document.getElementById("perfil-versao").textContent = versaoCardapioTexto();
 
-    const nivelTaxa = calcularNivelTaxaQueima();
-    document.getElementById("taxa-marcador").style.left = POSICAO_MARCADOR_TAXA[nivelTaxa] + "%";
-    document.getElementById("taxa-resultado-texto").textContent = TEXTO_TAXA_QUEIMA[nivelTaxa];
+    document.getElementById("texto-previsao-24").textContent =
+      `${state.nome || "Você"}, prevemos que você atingirá seu peso ideal de ${state.pesoDesejado} kg até aproximadamente ${formatarData(proj.dataFinal)}!`;
 
-    const temOcasiao = state.ocasiaoEspecial && state.ocasiaoEspecial !== "nenhuma";
-    const trechoOcasiao = temOcasiao ? ` em ${state.ocasiaoEspecialLabel}` : "";
-    document.getElementById("texto-projecao-24").textContent =
-      `Seguindo o Plano Alimentar Para Lactantes, ${state.nome || "você"} pode chegar${trechoOcasiao} com o corpo que deseja sem parar de amamentar e sem dietas restritivas!`;
-
-    iniciarNotificacoesFake();
+    requestAnimationFrame(() => {
+      desenharGraficoPeso(document.getElementById("grafico-24"), proj.pontos, 160);
+    });
   }
 
-  if (indice === "25") {
+  if (indice === 25) {
     const mostrarAplv = state.aplv === "sim" || state.aplv === "suspeita";
     document.getElementById("aplv-aviso-25").classList.toggle("oculto", !mostrarAplv);
     document.getElementById("item-cardapio-nome").textContent = mostrarAplv
       ? "✓ Plano Alimentar Para Lactantes (+ Versão APLV)"
       : "✓ Plano Alimentar Para Lactantes";
-
-    renderizarRecap();
-    renderizarBonusOferta();
   }
 }
 
 /* ---------------------------------------------------------------------
    Etapa 23: animação de carregamento
    --------------------------------------------------------------------- */
-const LOADING_TEXTO_FALLBACK = "Identificando alimentos ideais para você...";
-
-const LOADING_TEXTO_SONO = {
-  "menos-4h": "Ajustando o plano para quem dorme menos de 4h...",
-  "4-5h": "Ajustando o plano para quem dorme de 4 a 5h...",
-  "6h-mais": "Ajustando o plano para a sua rotina de sono...",
-};
-const LOADING_TEXTO_MOMENTO = {
-  manha: "Incluindo estratégia para a sua manhã...",
-  tarde: "Incluindo estratégia para a sua tarde...",
-  noite: "Incluindo estratégia para as suas noites...",
-  madrugada: "Incluindo estratégia para as madrugadas de mamada...",
-  "ansiosa-cansada": "Incluindo estratégia para os momentos de ansiedade e cansaço...",
-};
-const LOADING_TEXTO_PREPARO = {
-  "menos-15min": "Montando refeições de menos de 15 minutos...",
-  "15-30min": "Montando refeições de 15 a 30 minutos...",
-  "ate-1hora": "Montando refeições práticas para a sua rotina...",
-};
-
-function prepararTextosLoading() {
-  document.getElementById("loading-texto-sono").textContent = LOADING_TEXTO_SONO[state.sono] || LOADING_TEXTO_FALLBACK;
-  document.getElementById("loading-texto-momento").textContent = LOADING_TEXTO_MOMENTO[state.momentoComida] || LOADING_TEXTO_FALLBACK;
-  document.getElementById("loading-texto-preparo").textContent = LOADING_TEXTO_PREPARO[state.tempoPreparo] || LOADING_TEXTO_FALLBACK;
-}
-
 function iniciarLoading() {
   const fill = document.getElementById("loading-barra-fill");
   const percentualEl = document.getElementById("loading-percentual-valor");
   const itens = document.querySelectorAll("#loading-checklist .loading-item");
   const social = document.getElementById("loading-social");
 
-  prepararTextosLoading();
   itens.forEach((it) => it.classList.remove("ativo"));
   social.classList.remove("visivel");
   fill.style.width = "0%";
   percentualEl.textContent = "0";
 
-  const duracaoMs = 10500;
+  const duracaoMs = 10000;
   const inicio = performance.now();
 
   function passo(agora) {
@@ -962,11 +703,9 @@ function iniciarLoading() {
     percentualEl.textContent = pct;
 
     if (pct >= 10) itens[0].classList.add("ativo");
-    if (pct >= 25) itens[1].classList.add("ativo");
-    if (pct >= 40) itens[2].classList.add("ativo");
-    if (pct >= 55) itens[3].classList.add("ativo");
-    if (pct >= 70) itens[4].classList.add("ativo");
-    if (pct >= 85) itens[5].classList.add("ativo");
+    if (pct >= 35) itens[1].classList.add("ativo");
+    if (pct >= 60) itens[2].classList.add("ativo");
+    if (pct >= 85) itens[3].classList.add("ativo");
     if (pct >= 75) social.classList.add("visivel");
 
     if (progresso < 1) {
@@ -979,7 +718,7 @@ function iniciarLoading() {
 }
 
 /* ---------------------------------------------------------------------
-   Notificações de compra fake (Etapa 24 até o final do quiz)
+   Notificações de compra fake (Etapa 21 até o final do quiz)
 
    Regras: nunca duas visíveis ao mesmo tempo (fila estritamente
    sequencial via setTimeout encadeado, não setInterval), cada uma
@@ -1114,6 +853,7 @@ function irParaOfertaSuper() {
 function configurarOfertaFinal() {
   document.getElementById("btn-checkout-super").addEventListener("click", () => irParaCheckout("super"));
   document.getElementById("btn-checkout-resumo").addEventListener("click", irParaOfertaSuper);
+  document.getElementById("btn-checkout-bio").addEventListener("click", irParaOfertaSuper);
 
   const modal = document.getElementById("modal-retencao");
 

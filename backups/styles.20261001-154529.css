@@ -1062,32 +1062,6 @@ input[type="range"].slider-input {
 .bloco-resumo ul { margin: 0 0 14px; padding-left: 20px; font-size: 14px; }
 .bloco-resumo li { margin-bottom: 4px; }
 
-/* ---------- Mini bio, antes do preço (Etapa 25) ---------- */
-
-.mini-bio-card {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  background: var(--cor-cartao);
-  border: 1px solid var(--cor-borda);
-  border-radius: var(--raio);
-  padding: 16px;
-  margin-bottom: 16px;
-}
-.mini-bio-foto {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid var(--cor-primaria-clara);
-  flex-shrink: 0;
-}
-.mini-bio-card p {
-  font-size: 13px;
-  color: var(--cor-texto);
-  margin: 0;
-}
-
 /* ---------- Bio da nutricionista (Etapa 25) ---------- */
 
 .bio-card {
