@@ -443,9 +443,42 @@ img { max-width: 100%; display: block; }
   font-size: 15px;
   margin-bottom: 20px;
 }
-.abertura-imagem {
-  margin: 0 auto 20px;
-  max-width: 260px;
+.abertura-expert {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2px auto 20px;
+}
+.abertura-expert-foto-anel {
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  background: conic-gradient(from 200deg, var(--cor-primaria-clara), var(--cor-secundaria) 45%, var(--cor-primaria) 75%, var(--cor-primaria-clara));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  margin-bottom: 10px;
+}
+.abertura-expert-foto {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  border: 3px solid var(--cor-cartao);
+}
+.abertura-expert-nome {
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--cor-texto);
+  margin-bottom: 2px;
+}
+.abertura-expert-profissao {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--cor-primaria);
+  margin-top: 0;
 }
 .selos {
   display: flex;
@@ -1261,7 +1294,7 @@ input[type="range"].slider-input {
   }
 }
 </style>
-<link rel="preload" as="image" href="assets/etapas/etapa00-abertura/produto-mockup.webp" fetchpriority="high">
+<link rel="preload" as="image" href="assets/etapas/etapa25-bio/perfil.webp" fetchpriority="high">
 
 <!-- Meta Pixel Code -->
 <script>
@@ -1332,11 +1365,18 @@ if (document.readyState === "complete") {
       <h1 class="abertura-headline">Volte a vestir suas <span class="destaque">roupas de antes da gestação</span> em 4 semanas, sem secar o leite</h1>
       <p class="abertura-sub">Sem cortar sua energia, sem dietas restritas e sem precisar de tempo que você não tem. Um cardápio feito por nutricionista especializada em lactantes.</p>
 
-      <img class="abertura-imagem foto-real" loading="eager" fetchpriority="high" decoding="async" width="460" height="314" src="assets/etapas/etapa00-abertura/produto-mockup.webp" alt="Mockup do tablet e celular exibindo o Plano Alimentar Para Lactantes">
+      <div class="abertura-expert">
+        <div class="abertura-expert-foto-anel">
+          <img class="abertura-expert-foto" loading="eager" fetchpriority="high" decoding="async" width="1080" height="1080" src="assets/etapas/etapa25-bio/perfil.webp" alt="Foto de Ákila Samara">
+        </div>
+        <p class="abertura-expert-nome">Ákila Samara</p>
+        <p class="abertura-expert-profissao">Nutricionista • CRN/9 29522</p>
+      </div>
 
       <div class="selos">
-        <span class="selo">+20 mil mães</span>
-        <span class="selo">Mantém o Leite</span>
+        <span class="selo">👥 +20 mil mães</span>
+        <span class="selo">🤱 Mantém o Leite</span>
+        <span class="selo">✅ Sem Dieta Restritiva</span>
       </div>
 
       <div class="aviso-box">
