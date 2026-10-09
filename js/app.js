@@ -30,7 +30,7 @@ const CHECKOUT_URL_BASICO = "https://plano.akilasamara.com.br/?preco=1090";
    do painel publicado, os eventos simplesmente falham em silêncio (o
    catch abaixo garante isso) e o quiz continua funcionando normal.
    --------------------------------------------------------------------- */
-const PAINEL_EVENTOS_URL = "https://painel-akila.SEU-SUBDOMINIO.workers.dev/api/eventos";
+const PAINEL_EVENTOS_URL = "https://painel-akila.gabrielcavalcantepro89.workers.dev/api/eventos";
 const sessaoIdPainel = (window.crypto && crypto.randomUUID)
   ? crypto.randomUUID()
   : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
