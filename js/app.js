@@ -17,6 +17,62 @@ const CHECKOUT_URL_SUPER = "https://plano.akilasamara.com.br/?preco=1990";
 const CHECKOUT_URL_BASICO = "https://plano.akilasamara.com.br/?preco=1090";
 
 /* ---------------------------------------------------------------------
+   Rastreamento de funil (painel interno da Ákila, projeto separado
+   "painel-akila"). Manda um evento "etapa vista" sempre que a pessoa
+   entra numa etapa, e um "opção selecionada" sempre que ela marca uma
+   resposta — só isso, pra enxergar em que etapa os leads desistem e
+   quais respostas escolhem. Nunca compete com o carregamento inicial:
+   os eventos ficam numa fila até a página terminar de carregar (mesmo
+   atraso de 1200ms já usado para o Pixel/Clarity logo abaixo no HTML),
+   e depois disso cada envio usa navigator.sendBeacon, feito
+   especificamente pelo navegador para despachar em segundo plano sem
+   travar nada e sem esperar resposta. Se essa URL não for trocada pela
+   do painel publicado, os eventos simplesmente falham em silêncio (o
+   catch abaixo garante isso) e o quiz continua funcionando normal.
+   --------------------------------------------------------------------- */
+const PAINEL_EVENTOS_URL = "https://painel-akila.SEU-SUBDOMINIO.workers.dev/api/eventos";
+const sessaoIdPainel = (window.crypto && crypto.randomUUID)
+  ? crypto.randomUUID()
+  : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+
+let painelEventosProntos = false;
+let filaEventosPainel = [];
+
+function despacharEventoPainel(corpo) {
+  try {
+    const json = JSON.stringify(corpo);
+    if (navigator.sendBeacon) {
+      navigator.sendBeacon(PAINEL_EVENTOS_URL, new Blob([json], { type: "text/plain" }));
+    } else {
+      fetch(PAINEL_EVENTOS_URL, { method: "POST", body: json, keepalive: true, headers: { "Content-Type": "text/plain" } }).catch(() => {});
+    }
+  } catch (e) {
+    /* rastreamento nunca pode quebrar o quiz */
+  }
+}
+
+function enviarEventoPainel(payload) {
+  const corpo = { sessaoId: sessaoIdPainel, nome: state.nome || null, ts: Date.now(), ...payload };
+  if (!painelEventosProntos) {
+    filaEventosPainel.push(corpo);
+    return;
+  }
+  despacharEventoPainel(corpo);
+}
+
+function ativarEventosPainel() {
+  painelEventosProntos = true;
+  filaEventosPainel.forEach(despacharEventoPainel);
+  filaEventosPainel = [];
+}
+
+if (document.readyState === "complete") {
+  setTimeout(ativarEventosPainel, 1200);
+} else {
+  window.addEventListener("load", () => setTimeout(ativarEventosPainel, 1200));
+}
+
+/* ---------------------------------------------------------------------
    Ritmo máximo de emagrecimento (kg/semana) usado para colocar um teto
    realista na projeção (Etapa 20 em diante). Valor sugerido pela
    nutricionista (4 kg/mês); pendente de confirmação final dela, ver
@@ -180,6 +236,7 @@ function irPara(indice) {
   if (atualEl) atualEl.classList.remove("etapa-ativa");
   novaEl.classList.add("etapa-ativa");
   etapaAtual = indice;
+  enviarEventoPainel({ tipo: "etapa_vista", etapa: indice });
 
   atualizarProgresso(indice);
   atualizarBotaoVoltar(indice);
@@ -245,6 +302,7 @@ function configurarOpcoes() {
         opcao.classList.add("selecionada");
         state[campo] = opcao.dataset.valor;
         state[campo + "Label"] = label;
+        enviarEventoPainel({ tipo: "opcao_selecionada", etapa: container.closest(".etapa").dataset.etapa, campo, valor: opcao.dataset.valor, label });
 
         if (config) {
           document.getElementById(config.boxId).classList.remove("oculto");
@@ -269,6 +327,9 @@ function configurarOpcoes() {
 
         const selecionados = Array.from(container.querySelectorAll(".selecionada")).map((o) => o.dataset.valor);
         state[campo] = selecionados;
+        if (opcao.classList.contains("selecionada")) {
+          enviarEventoPainel({ tipo: "opcao_selecionada", etapa: container.closest(".etapa").dataset.etapa, campo, valor: opcao.dataset.valor, label });
+        }
 
         if (config) {
           const temSelecao = selecionados.length > 0;
@@ -1140,4 +1201,5 @@ document.addEventListener("DOMContentLoaded", () => {
   configurarSliders();
   configurarOfertaFinal();
   atualizarProgresso(0);
+  enviarEventoPainel({ tipo: "etapa_vista", etapa: "0" });
 });
